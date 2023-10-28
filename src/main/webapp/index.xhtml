@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Hello!</title>
+</h:head>
+<h:body>
+	<h:form id="form_home">
+		<p:growl id="messages" showDetail="true" />
+		<div>
+			<div class="field">
+				<p:outputLabel for="nome">Nome</p:outputLabel>
+				<p:inputText id="nome" styleClass="block"
+					value="#{home.usuario.nome}" />
+			</div>
+			<div class="field">
+				<p:outputLabel for="senha">Senha</p:outputLabel>
+				<p:password id="senha" styleClass="block"
+					value="#{home.usuario.senha}" feedback="true" redisplay="true" toggleMask="true"/>
+			</div>
+			<p:commandButton id="btnSalvar" value="CADASTRAR"
+				action="#{home.cadastrarUsuario()}" update="form_home" />
+		</div>
+		<p:dataTable id="datatable" rowKey="#{usuario.nome}" var="usuario"
+			value="#{home.usuarios}" selection="#{home.selectedUsuario}"
+			selectionMode="single" row="20">
+			<f:facet name="header">
+                Usuários Cadastrados
+            </f:facet>
+
+			<p:ajax event="rowSelect" oncomplete="PF('updateUsuarioWV').show()"
+				update="form_updateUsuario:updateUsuario" listener="#{home.onRowSelect}" />
+
+			<p:column headerText="Usuario">
+				<h:outputText value="#{usuario.nome}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+	<h:form id="form_updateUsuario">
+		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
+			id="updateUsuario" widgetVar="updateUsuarioWV" responsive="true">
+			<div>
+				<div class="field">
+					<p:outputLabel for="nome">Nome</p:outputLabel>
+					<p:inputText id="nome" styleClass="block"
+						value="#{home.selectedUsuario.nome}" />
+				</div>
+				<div class="field">
+					<p:outputLabel for="senha">Senha</p:outputLabel>
+					<p:password id="senha" styleClass="block"
+						value="#{home.selectedUsuario.senha}" feedback="true" redisplay="true" toggleMask="true"/>
+				</div>
+				<p:commandButton id="btnSalvar" value="ATUALIZAR"
+					action="#{home.atualizarUsuario()}" oncomplete="PF('updateUsuarioWV').hide()" update="form_home"/>
+			</div>
+		</p:dialog>
+	</h:form>
+
+</h:body>
+</html>
