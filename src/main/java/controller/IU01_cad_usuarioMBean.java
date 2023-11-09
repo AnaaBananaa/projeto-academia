@@ -15,14 +15,14 @@ import sessionbean.ManterUsuarioSBean;
 
 @ViewScoped
 @ManagedBean(name = "home")
-public class IU01_Home {
+public class IU01_cad_usuarioMBean {
 
 	private TOUsuario usuario;
 	private List<TOUsuario> usuarios;
 	private TOUsuario selectedUsuario;
 	private ManterUsuarioSBean sbean = new ManterUsuarioSBean();
 
-	public IU01_Home() {
+	public IU01_cad_usuarioMBean() {
 		this.usuario = new TOUsuario();
 		this.setUsuarios(new ArrayList<>());
 		listarUsuarios();
