@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Hello!</title>
+	<style></style>
+</h:head>
+<h:body>
+	<h:form id="form_matriculaMBean">
+		<p:growl id="messages" showDetail="true" />
+		<div style="width: 100%;">
+			
+			<div >
+				<p:outputLabel for="@next" value="Atividade" />
+				<p:selectOneMenu id="atividade" value="#{matriculaMBean.matricula.atividade}">
+					<f:selectItem itemLabel="--" itemValue="" />
+					<f:selectItems value="#{matriculaMBean.atividades}" />
+				</p:selectOneMenu>
+			</div>
+			
+			<div style="float: left;">
+				<p:outputLabel for="@next" value="Aluno" />
+				<p:selectOneMenu id="aluno" value="#{matriculaMBean.matricula.aluno}">
+					<f:selectItem itemLabel="--" itemValue="" />
+					<f:selectItems value="#{matriculaMBean.alunos}" />
+				</p:selectOneMenu>
+			</div>
+			
+			<div style="float: left;">
+				<p:outputLabel for="@next" value="Professor" />
+				<p:selectOneMenu id="professor" value="#{matriculaMBean.matricula.professor}">
+					<f:selectItem itemLabel="--" itemValue="" />
+					<f:selectItems value="#{matriculaMBean.professores}" />
+				</p:selectOneMenu>
+			</div>
+			
+			<p:commandButton id="btnSalvar" value="CADASTRAR"
+				action="#{matriculaMBean.cadastrarMatricula()}" update="form_matriculaMBean" />
+		</div>
+		
+		<p:dataTable id="datatable" rowKey="#{matricula.nome}" var="matricula"
+			value="#{matriculaMBean.matriculas}" selection="#{matriculaMBean.selectedMatricula}"
+			selectionMode="single" row="20" size="100%">
+			<f:facet name="header">
+                Matriculas Cadastrados
+            </f:facet>
+
+			<p:ajax event="rowSelect" oncomplete="PF('updateMatriculaWV').show()"
+				update="form_updateMatricula:updateMatricula"
+				listener="#{matriculaMBean.onRowSelect}" />
+
+			<p:column headerText="Matricula">
+				<h:outputText value="#{matricula.aluno.nomeAluno}" />
+			</p:column>
+			
+			<p:column headerText="Data Nascimento" >
+				<h:outputText value="#{matricula.professor.nome}" />
+			</p:column>
+			
+			<p:column headerText="Genero" >
+				<h:outputText value="#{matricula.atividade.nome}" />
+			</p:column>
+			
+		</p:dataTable>
+	</h:form>
+
+	<h:form id="form_updateMatricula">
+		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
+			id="updateMatricula" widgetVar="updateMatriculaWV" responsive="true">
+			<div>
+				<!-- <div>
+					<p:outputLabel for="@next" value="Atividade" />
+					<p:selectOneMenu id="atividadeS"
+						value="#{matriculaMBean.selectedMatricula.atividade}">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{matriculaMBean.atividades}" />
+					</p:selectOneMenu>
+				</div>
+
+				<div style="float: left;">
+					<p:outputLabel for="@next" value="Aluno" />
+					<p:selectOneMenu id="alunoS"
+						value="#{matriculaMBean.selectedMatricula.aluno}">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{matriculaMBean.alunos}" />
+					</p:selectOneMenu>
+				</div>
+
+				<div style="float: left;">
+					<p:outputLabel for="@next" value="Professor" />
+					<p:selectOneMenu id="professorS"
+						value="#{matriculaMBean.selectedMatricula.professor}">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{matriculaMBean.professores}" />
+					</p:selectOneMenu>
+				</div> -->
+
+				<p:commandButton id="btnSalvar" value="ATUALIZAR"
+					action="#{matriculaMBean.atualizarMatricula()}"
+					oncomplete="PF('updateMatriculaWV').hide()" update="form_matriculaMBean" />
+			</div>
+		</p:dialog>
+	</h:form>
+
+</h:body>
+</html>

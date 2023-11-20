@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Hello!</title>
+</h:head>
+<h:body>
+	<h:form id="form_atividadeMBean">
+		<p:growl id="messages" showDetail="true" />
+		<div>
+			<div class="field">
+				<p:outputLabel for="@next" value="Nome"/>
+				<p:inputText id="nome" styleClass="block"
+					value="#{atividadeMBean.atividade.nome}" />
+			</div>
+			<div>
+				<p:outputLabel for="@next" value="Dia da Semana" />
+				<p:selectOneMenu id="diaSemana" value="#{atividadeMBean.atividade.diaSemana}">
+					<f:selectItem itemLabel="--" itemValue="" />
+					<f:selectItems value="#{atividadeMBean.diasSemana}" />
+				</p:selectOneMenu>
+			</div>
+			<div>
+				<p:outputLabel for="@next" value="Horário Início" />
+				<p:selectOneMenu id="inicio" value="#{atividadeMBean.atividade.horarioInicio}">
+					<f:selectItem itemLabel="--" itemValue="" />
+					<f:selectItems value="#{atividadeMBean.horarios}" />
+				</p:selectOneMenu>
+			</div>
+			<div>
+				<p:outputLabel for="@next" value="Horário Fim" />
+				<p:selectOneMenu id="fim" value="#{atividadeMBean.atividade.horarioFim}">
+					<f:selectItem itemLabel="--" itemValue="" />
+					<f:selectItems value="#{atividadeMBean.horarios}" />
+				</p:selectOneMenu>
+			</div>
+			<p:commandButton id="btnSalvar" value="CADASTRAR"
+				action="#{atividadeMBean.cadastrarAtividade()}" update="form_atividadeMBean" />
+		</div>
+		<p:dataTable id="datatable" rowKey="#{atividade.nome}" var="atividade"
+			value="#{atividadeMBean.atividades}" selection="#{atividadeMBean.selectedAtividade}"
+			selectionMode="single" row="20">
+			<f:facet name="header">
+                Atividades Cadastrados
+            </f:facet>
+
+			<p:ajax event="rowSelect" oncomplete="PF('updateAtividadeWV').show()"
+				update="form_updateAtividade:updateAtividade" listener="#{atividadeMBean.onRowSelect}" />
+
+			<p:column headerText="Atividade">
+				<h:outputText value="#{atividade.nome}" />
+			</p:column>
+			
+			<p:column headerText="Dia da Semana">
+				<h:outputText value="#{atividade.diaSemana}" />
+			</p:column>
+			
+			<p:column headerText="Horário">
+				<h:outputText value="#{atividade.horarioInicio} - #{atividade.horarioFim}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+	<h:form id="form_updateAtividade">
+		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
+			id="updateAtividade" widgetVar="updateAtividadeWV" responsive="true">
+			<div>
+				<div class="field">
+					<p:outputLabel for="nome">Nome</p:outputLabel>
+					<p:inputText id="nome" styleClass="block"
+						value="#{atividadeMBean.selectedAtividade.nome}" />
+				</div>
+				<div class="field">
+					<p:outputLabel for="@next">Dia da Semana</p:outputLabel>
+					<p:inputText id="diaSemana" styleClass="block"
+						value="#{atividadeMBean.selectedAtividade.diaSemana}" />
+				</div>
+
+				<div>
+					<p:outputLabel for="@next" value="Horário Início" />
+					<p:selectOneMenu id="inicio"
+						value="#{atividadeMBean.selectedAtividade.horarioInicio}">
+						<f:selectItem itemLabel="--" itemValue="" />
+						<f:selectItems value="#{atividadeMBean.horarios}" />
+					</p:selectOneMenu>
+				</div>
+				<div>
+					<p:outputLabel for="@next" value="Horário Fim" />
+					<p:selectOneMenu id="fim"
+						value="#{atividadeMBean.selectedAtividade.horarioFim}">
+						<f:selectItem itemLabel="--" itemValue="" />
+						<f:selectItems value="#{atividadeMBean.horarios}" />
+					</p:selectOneMenu>
+				</div>
+				<p:commandButton id="btnSalvar" value="ATUALIZAR"
+					action="#{atividadeMBean.atualizarAtividade()}" oncomplete="PF('updateAtividadeWV').hide()" update="form_atividadeMBean"/>
+			</div>
+		</p:dialog>
+	</h:form>
+
+</h:body>
+</html>
