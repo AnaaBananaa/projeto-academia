@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.entity.Aluno;
 import model.transferobject.TOAluno;
+import model.transferobject.TOProfessor;
 import repository.Repository;
 
 public class ManterAlunoSBean {
@@ -45,6 +46,15 @@ public class ManterAlunoSBean {
 				u.setBairro(aluno.getBairro());
 			}
 		}
+	}
+	
+	public TOAluno getAlunoById(String id) {
+		for(TOAluno aluno : listarAlunos()) {
+			if(aluno.getId().equals(id)) {
+				return aluno;
+			}
+		}
+		return new TOAluno();
 	}
 	
 	private String getId() {

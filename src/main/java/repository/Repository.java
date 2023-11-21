@@ -49,7 +49,7 @@ public class Repository {
 	public void addProfessores(Professor professor) {
 		this.professores.add(professor);
 	}
-
+	
 	public List<Atividade> getAtividades() {
 		return atividades;
 	}

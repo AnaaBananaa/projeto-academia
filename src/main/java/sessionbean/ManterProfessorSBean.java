@@ -40,6 +40,15 @@ public class ManterProfessorSBean {
 		}
 	}
 	
+	public TOProfessor getProfessorById(String id) {
+		for(TOProfessor professor : listarProfessores()) {
+			if(professor.getId().equals(id)) {
+				return professor;
+			}
+		}
+		return new TOProfessor();
+	}
+	
 	private String getId() {
 		id = id+1;
 		return "A"+id;

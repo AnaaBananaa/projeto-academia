@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.entity.Atividade;
 import model.transferobject.TOAtividade;
+import model.transferobject.TOProfessor;
 import repository.Repository;
 
 public class ManterAtividadeSBean {
@@ -35,6 +36,15 @@ public class ManterAtividadeSBean {
 				u.setNome(usuario.getNome());
 			}
 		}
+	}
+	
+	public TOAtividade getAtividadeById(String id) {
+		for(TOAtividade atividade : listarAtividades()) {
+			if(atividade.getId().equals(id)) {
+				return atividade;
+			}
+		}
+		return new TOAtividade();
 	}
 	
 	private String getId() {

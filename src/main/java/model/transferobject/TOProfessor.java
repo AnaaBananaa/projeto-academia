@@ -1,5 +1,7 @@
 package model.transferobject;
 
+import java.util.Objects;
+
 public class TOProfessor {
 	String id;
 	String nome;
@@ -31,7 +33,27 @@ public class TOProfessor {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return  nome;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TOProfessor other = (TOProfessor) obj;
+		return Objects.equals(id, other.id) && Objects.equals(nome, other.nome);
+	}
+	
 }

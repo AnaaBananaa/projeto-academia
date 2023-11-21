@@ -1,5 +1,7 @@
 package model.transferobject;
 
+import java.util.Objects;
+
 public class TOAtividade {
 	String id;
 	String nome;
@@ -62,6 +64,29 @@ public class TOAtividade {
 	public void setHorarioFim(String horarioFim) {
 		this.horarioFim = horarioFim;
 	}
-	
+
+	@Override
+	public String toString() {
+		return nome + ", " + horarioInicio + " - " + horarioFim;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(diaSemana, horarioFim, horarioInicio, id, nome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TOAtividade other = (TOAtividade) obj;
+		return Objects.equals(diaSemana, other.diaSemana) && Objects.equals(horarioFim, other.horarioFim)
+				&& Objects.equals(horarioInicio, other.horarioInicio) && Objects.equals(id, other.id)
+				&& Objects.equals(nome, other.nome);
+	}
 	
 }

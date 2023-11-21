@@ -1,5 +1,7 @@
 package model.entity;
 
+import java.util.Objects;
+
 import model.transferobject.TOAluno;
 import model.transferobject.TOAtividade;
 import model.transferobject.TOProfessor;
@@ -42,7 +44,21 @@ public class Matricula {
 	public void setProfessor(TOProfessor professor) {
 		this.professor = professor;
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(aluno, atividade, id, professor);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Matricula other = (Matricula) obj;
+		return Objects.equals(aluno, other.aluno) && Objects.equals(atividade, other.atividade)
+				&& Objects.equals(id, other.id) && Objects.equals(professor, other.professor);
+	}
 	
-	
-
 }

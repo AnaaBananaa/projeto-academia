@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import org.primefaces.event.SelectEvent;
 
@@ -26,25 +27,55 @@ public class IU01_cad_matriculaMBean {
 	private TOMatricula matricula;
 	private List<TOMatricula> matriculas;
 	private TOMatricula selectedMatricula;
-	private List<TOAluno> alunos;
-	private List<TOProfessor> professores;
-	private List<TOAtividade> atividades;
+	
+	private String alunoSelectedAtt;
+	private String atividadeSelectedAtt;
+	private String professorSelectedAtt;
+	
+	private String alunoSelected;
+	private String atividadeSelected;
+	private String professorSelected;
+	private List<SelectItem> professores = new ArrayList<>();
+	private List<SelectItem> atividades = new ArrayList<>();
+	private List<SelectItem> alunos = new ArrayList<>();
+	
 	private ManterMatriculaSBean sbean = new ManterMatriculaSBean();
 	private ManterAlunoSBean alunoSbean = new ManterAlunoSBean();
 	private ManterProfessorSBean professorSbean = new ManterProfessorSBean();
 	private ManterAtividadeSBean atividadeSBean = new ManterAtividadeSBean();
 
 	public IU01_cad_matriculaMBean() {
-		alunos = alunoSbean.listarAlunos();
-		professores = professorSbean.listarProfessores();
-		atividades = atividadeSBean.listarAtividades();
 		this.matricula = new TOMatricula();
 		this.setMatriculaes(new ArrayList<>());
 		listarMatriculaes();
+		populaSelect();
 	}
-
-	public String getMessage() {
-		return "Primeira Tela";
+	
+	private void populaSelect() {
+		populaProfessor();
+		populaAluno();
+		populaAtividade();
+	}
+	
+	private void populaProfessor() {
+		List<TOProfessor> profs = professorSbean.listarProfessores();
+		for(TOProfessor prof : profs) {
+			professores.add(new SelectItem(prof.getId(), prof.getNome()));
+		}
+	}
+	
+	private void populaAtividade() {
+		List<TOAtividade> lista = atividadeSBean.listarAtividades();
+		for(TOAtividade att : lista) {
+			atividades.add(new SelectItem(att.getId(), att.getNome() +" "+ att.getHorarioInicio() +" - "+ att.getHorarioFim()));
+		}
+	}
+	
+	private void populaAluno() {
+		List<TOAluno> lista = alunoSbean.listarAlunos();
+		for(TOAluno aluno : lista) {
+			alunos.add(new SelectItem(aluno.getId(), aluno.getNome()));
+		}
 	}
 	
 	private void listarMatriculaes() {
@@ -52,6 +83,9 @@ public class IU01_cad_matriculaMBean {
 	}
 	
 	public void cadastrarMatricula() {
+		matricula.setProfessor(professorSbean.getProfessorById(professorSelected));
+		matricula.setAluno(alunoSbean.getAlunoById(alunoSelected));
+		matricula.setAtividade(atividadeSBean.getAtividadeById(atividadeSelected));
 		sbean.cadastrarMatricula(matricula);
 		listarMatriculaes();
 	}
@@ -61,6 +95,10 @@ public class IU01_cad_matriculaMBean {
 	}
 	
 	public void atualizarMatricula() {
+		selectedMatricula.getId();
+		selectedMatricula.setProfessor(professorSbean.getProfessorById(professorSelectedAtt));
+		selectedMatricula.setAluno(alunoSbean.getAlunoById(alunoSelectedAtt));
+		selectedMatricula.setAtividade(atividadeSBean.getAtividadeById(atividadeSelectedAtt));
 		sbean.atualizarMatricula(selectedMatricula);
 		listarMatriculaes();
 		showInfo();
@@ -131,28 +169,84 @@ public class IU01_cad_matriculaMBean {
 		this.matriculas = matriculas;
 	}
 
-	public List<TOAluno> getAlunos() {
-		return alunos;
+	public ManterMatriculaSBean getSbean() {
+		return sbean;
 	}
 
-	public void setAlunos(List<TOAluno> alunos) {
-		this.alunos = alunos;
+	public void setSbean(ManterMatriculaSBean sbean) {
+		this.sbean = sbean;
 	}
 
-	public List<TOProfessor> getProfessores() {
+	public String getAlunoSelected() {
+		return alunoSelected;
+	}
+
+	public void setAlunoSelected(String alunoSelected) {
+		this.alunoSelected = alunoSelected;
+	}
+
+	public String getAtividadeSelected() {
+		return atividadeSelected;
+	}
+
+	public void setAtividadeSelected(String atividadeSelected) {
+		this.atividadeSelected = atividadeSelected;
+	}
+
+	public String getProfessorSelected() {
+		return professorSelected;
+	}
+
+	public void setProfessorSelected(String professorSelected) {
+		this.professorSelected = professorSelected;
+	}
+
+	public List<SelectItem> getProfessores() {
 		return professores;
 	}
 
-	public void setProfessores(List<TOProfessor> professores) {
+	public void setProfessores(List<SelectItem> professores) {
 		this.professores = professores;
 	}
 
-	public List<TOAtividade> getAtividades() {
+	public List<SelectItem> getAtividades() {
 		return atividades;
 	}
 
-	public void setAtividades(List<TOAtividade> atividades) {
+	public void setAtividades(List<SelectItem> atividades) {
 		this.atividades = atividades;
+	}
+
+	public List<SelectItem> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<SelectItem> alunos) {
+		this.alunos = alunos;
+	}
+
+	public String getAlunoSelectedAtt() {
+		return alunoSelectedAtt;
+	}
+
+	public void setAlunoSelectedAtt(String alunoSelectedAtt) {
+		this.alunoSelectedAtt = alunoSelectedAtt;
+	}
+
+	public String getAtividadeSelectedAtt() {
+		return atividadeSelectedAtt;
+	}
+
+	public void setAtividadeSelectedAtt(String atividadeSelectedAtt) {
+		this.atividadeSelectedAtt = atividadeSelectedAtt;
+	}
+
+	public String getProfessorSelectedAtt() {
+		return professorSelectedAtt;
+	}
+
+	public void setProfessorSelectedAtt(String professorSelectedAtt) {
+		this.professorSelectedAtt = professorSelectedAtt;
 	}
 	
 }

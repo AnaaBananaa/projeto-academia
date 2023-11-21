@@ -1,5 +1,7 @@
 package model.transferobject;
 
+import java.util.Objects;
+
 public class TOAluno {
 
     private String id;
@@ -188,6 +190,35 @@ public class TOAluno {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	@Override
+	public String toString() {
+		return  nome + ", " + dataNascimento;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(CEP, ativo, bairro, celular, cidade, dataNascimento, email, estado, genero, id, nome,
+				numero, rua);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TOAluno other = (TOAluno) obj;
+		return Objects.equals(CEP, other.CEP) && Objects.equals(ativo, other.ativo)
+				&& Objects.equals(bairro, other.bairro) && Objects.equals(celular, other.celular)
+				&& Objects.equals(cidade, other.cidade) && Objects.equals(dataNascimento, other.dataNascimento)
+				&& Objects.equals(email, other.email) && Objects.equals(estado, other.estado)
+				&& Objects.equals(genero, other.genero) && Objects.equals(id, other.id)
+				&& Objects.equals(nome, other.nome) && Objects.equals(numero, other.numero)
+				&& Objects.equals(rua, other.rua);
 	}
 
 }
