@@ -1,24 +1,22 @@
-package model.entity;
+package model.transferobject;
 
 import java.util.Objects;
 
-import model.transferobject.TOAluno;
-import model.transferobject.TOAtividade;
-import model.transferobject.TOProfessor;
-
-public class Matricula {
+public class TOMarcacaoHorario {
 	
 	private String id;
 	private TOAtividade atividade;
 	private TOAluno aluno;
-	private TOProfessor professor;
 	
-	public Matricula(String id, TOAtividade atividade, TOAluno aluno, TOProfessor professor) {
+	public TOMarcacaoHorario() {
+		super();
+	}
+	
+	public TOMarcacaoHorario(String id, TOAtividade atividade, TOAluno aluno) {
 		super();
 		this.id = id;
 		this.atividade = atividade;
 		this.aluno = aluno;
-		this.professor = professor;
 	}
 	public String getId() {
 		return id;
@@ -38,15 +36,10 @@ public class Matricula {
 	public void setAluno(TOAluno aluno) {
 		this.aluno = aluno;
 	}
-	public TOProfessor getProfessor() {
-		return professor;
-	}
-	public void setProfessor(TOProfessor professor) {
-		this.professor = professor;
-	}
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(aluno, atividade, id, professor);
+		return Objects.hash(aluno, atividade, id);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -56,9 +49,9 @@ public class Matricula {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Matricula other = (Matricula) obj;
+		TOMarcacaoHorario other = (TOMarcacaoHorario) obj;
 		return Objects.equals(aluno, other.aluno) && Objects.equals(atividade, other.atividade)
-				&& Objects.equals(id, other.id) && Objects.equals(professor, other.professor);
+				&& Objects.equals(id, other.id);
 	}
 	
 }

@@ -13,55 +13,41 @@ import org.primefaces.event.SelectEvent;
 
 import model.transferobject.TOAluno;
 import model.transferobject.TOAtividade;
-import model.transferobject.TOMatricula;
-import model.transferobject.TOProfessor;
+import model.transferobject.TOMarcacaoHorario;
 import sessionbean.ManterAlunoSBean;
 import sessionbean.ManterAtividadeSBean;
-import sessionbean.ManterMatriculaSBean;
-import sessionbean.ManterProfessorSBean;
+import sessionbean.ManterMarcacaoHorarioSBean;
 
 @ViewScoped
-@ManagedBean(name = "matriculaMBean")
-public class IU01_cad_matriculaMBean {
+@ManagedBean(name = "marcacaoHorarioMBean")
+public class IU01_cad_marcacao_horarioMBean {
 
-	private TOMatricula matricula;
-	private List<TOMatricula> matriculas;
-	private TOMatricula selectedMatricula;
+	private TOMarcacaoHorario marcacaoHorario;
+	private List<TOMarcacaoHorario> marcacaoHorarios;
+	private TOMarcacaoHorario selectedMarcacaoHorario;
 	
 	private String alunoSelectedAtt;
 	private String atividadeSelectedAtt;
-	private String professorSelectedAtt;
 	
 	private String alunoSelected;
 	private String atividadeSelected;
-	private String professorSelected;
-	private List<SelectItem> professores = new ArrayList<>();
 	private List<SelectItem> atividades = new ArrayList<>();
 	private List<SelectItem> alunos = new ArrayList<>();
 	
-	private ManterMatriculaSBean sbean = new ManterMatriculaSBean();
+	private ManterMarcacaoHorarioSBean sbean = new ManterMarcacaoHorarioSBean();
 	private ManterAlunoSBean alunoSbean = new ManterAlunoSBean();
-	private ManterProfessorSBean professorSbean = new ManterProfessorSBean();
 	private ManterAtividadeSBean atividadeSBean = new ManterAtividadeSBean();
 
-	public IU01_cad_matriculaMBean() {
-		this.matricula = new TOMatricula();
-		this.setMatriculaes(new ArrayList<>());
-		listarMatriculaes();
+	public IU01_cad_marcacao_horarioMBean() {
+		this.marcacaoHorario = new TOMarcacaoHorario();
+		this.setMarcacaoHorarioes(new ArrayList<>());
+		listarMarcacaoHorarioes();
 		populaSelect();
 	}
 	
 	private void populaSelect() {
-		populaProfessor();
 		populaAluno();
 		populaAtividade();
-	}
-	
-	private void populaProfessor() {
-		List<TOProfessor> profs = professorSbean.listarProfessores();
-		for(TOProfessor prof : profs) {
-			professores.add(new SelectItem(prof.getId(), prof.getNome()));
-		}
 	}
 	
 	private void populaAtividade() {
@@ -78,29 +64,27 @@ public class IU01_cad_matriculaMBean {
 		}
 	}
 	
-	private void listarMatriculaes() {
-		this.matriculas = sbean.listarMatriculas();
+	private void listarMarcacaoHorarioes() {
+		this.marcacaoHorarios = sbean.listarMarcacaoHorarios();
 	}
 	
-	public void cadastrarMatricula() {
-		matricula.setProfessor(professorSbean.getProfessorById(professorSelected));
-		matricula.setAluno(alunoSbean.getAlunoById(alunoSelected));
-		matricula.setAtividade(atividadeSBean.getAtividadeById(atividadeSelected));
-		sbean.cadastrarMatricula(matricula);
-		listarMatriculaes();
+	public void cadastrarMarcacaoHorario() {
+		marcacaoHorario.setAluno(alunoSbean.getAlunoById(alunoSelected));
+		marcacaoHorario.setAtividade(atividadeSBean.getAtividadeById(atividadeSelected));
+		sbean.cadastrarMarcacaoHorario(marcacaoHorario);
+		listarMarcacaoHorarioes();
 	}
 	
 	public void onRowSelect(SelectEvent<?> event){
-		selectedMatricula = (TOMatricula) event.getObject();
+		selectedMarcacaoHorario = (TOMarcacaoHorario) event.getObject();
 	}
 	
-	public void atualizarMatricula() {
-		selectedMatricula.getId();
-		selectedMatricula.setProfessor(professorSbean.getProfessorById(professorSelectedAtt));
-		selectedMatricula.setAluno(alunoSbean.getAlunoById(alunoSelectedAtt));
-		selectedMatricula.setAtividade(atividadeSBean.getAtividadeById(atividadeSelectedAtt));
-		sbean.atualizarMatricula(selectedMatricula);
-		listarMatriculaes();
+	public void atualizarMarcacaoHorario() {
+		selectedMarcacaoHorario.getId();
+		selectedMarcacaoHorario.setAluno(alunoSbean.getAlunoById(alunoSelectedAtt));
+		selectedMarcacaoHorario.setAtividade(atividadeSBean.getAtividadeById(atividadeSelectedAtt));
+		sbean.atualizarMarcacaoHorario(selectedMarcacaoHorario);
+		listarMarcacaoHorarioes();
 		showInfo();
 	}
 	
@@ -113,28 +97,28 @@ public class IU01_cad_matriculaMBean {
         addMessage(FacesMessage.SEVERITY_INFO, "Atualização de dados", "Dados salvos com sucesso");
     }
 
-	public TOMatricula getMatricula() {
-		return matricula;
+	public TOMarcacaoHorario getMarcacaoHorario() {
+		return marcacaoHorario;
 	}
 
-	public void setMatricula(TOMatricula matricula) {
-		this.matricula = matricula;
+	public void setMarcacaoHorario(TOMarcacaoHorario marcacaoHorario) {
+		this.marcacaoHorario = marcacaoHorario;
 	}
 
-	public List<TOMatricula> getMatriculaes() {
-		return matriculas;
+	public List<TOMarcacaoHorario> getMarcacaoHorarioes() {
+		return marcacaoHorarios;
 	}
 
-	public void setMatriculaes(List<TOMatricula> matriculas) {
-		this.matriculas = matriculas;
+	public void setMarcacaoHorarioes(List<TOMarcacaoHorario> marcacaoHorarios) {
+		this.marcacaoHorarios = marcacaoHorarios;
 	}
 
-	public TOMatricula getSelectedMatricula() {
-		return selectedMatricula;
+	public TOMarcacaoHorario getSelectedMarcacaoHorario() {
+		return selectedMarcacaoHorario;
 	}
 
-	public void setSelectedMatricula(TOMatricula selectedMatricula) {
-		this.selectedMatricula = selectedMatricula;
+	public void setSelectedMarcacaoHorario(TOMarcacaoHorario selectedMarcacaoHorario) {
+		this.selectedMarcacaoHorario = selectedMarcacaoHorario;
 	}
 
 	public ManterAlunoSBean getAlunoSbean() {
@@ -145,14 +129,6 @@ public class IU01_cad_matriculaMBean {
 		this.alunoSbean = alunoSbean;
 	}
 
-	public ManterProfessorSBean getProfessorSbean() {
-		return professorSbean;
-	}
-
-	public void setProfessorSbean(ManterProfessorSBean professorSbean) {
-		this.professorSbean = professorSbean;
-	}
-
 	public ManterAtividadeSBean getAtividadeSBean() {
 		return atividadeSBean;
 	}
@@ -161,19 +137,19 @@ public class IU01_cad_matriculaMBean {
 		this.atividadeSBean = atividadeSBean;
 	}
 
-	public List<TOMatricula> getMatriculas() {
-		return matriculas;
+	public List<TOMarcacaoHorario> getMarcacaoHorarios() {
+		return marcacaoHorarios;
 	}
 
-	public void setMatriculas(List<TOMatricula> matriculas) {
-		this.matriculas = matriculas;
+	public void setMarcacaoHorarios(List<TOMarcacaoHorario> marcacaoHorarios) {
+		this.marcacaoHorarios = marcacaoHorarios;
 	}
 
-	public ManterMatriculaSBean getSbean() {
+	public ManterMarcacaoHorarioSBean getSbean() {
 		return sbean;
 	}
 
-	public void setSbean(ManterMatriculaSBean sbean) {
+	public void setSbean(ManterMarcacaoHorarioSBean sbean) {
 		this.sbean = sbean;
 	}
 
@@ -191,22 +167,6 @@ public class IU01_cad_matriculaMBean {
 
 	public void setAtividadeSelected(String atividadeSelected) {
 		this.atividadeSelected = atividadeSelected;
-	}
-
-	public String getProfessorSelected() {
-		return professorSelected;
-	}
-
-	public void setProfessorSelected(String professorSelected) {
-		this.professorSelected = professorSelected;
-	}
-
-	public List<SelectItem> getProfessores() {
-		return professores;
-	}
-
-	public void setProfessores(List<SelectItem> professores) {
-		this.professores = professores;
 	}
 
 	public List<SelectItem> getAtividades() {
@@ -241,12 +201,4 @@ public class IU01_cad_matriculaMBean {
 		this.atividadeSelectedAtt = atividadeSelectedAtt;
 	}
 
-	public String getProfessorSelectedAtt() {
-		return professorSelectedAtt;
-	}
-
-	public void setProfessorSelectedAtt(String professorSelectedAtt) {
-		this.professorSelectedAtt = professorSelectedAtt;
-	}
-	
 }

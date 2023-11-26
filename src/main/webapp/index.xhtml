@@ -4,13 +4,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<title>Usuario</title>
 </h:head>
 <h:body>
 	<h:form id="form_home">
 		<p:growl id="messages" showDetail="true" />
+		<menu:menu/>
 		<div>
 			<div class="field">
 				<p:outputLabel for="nome">Nome</p:outputLabel>

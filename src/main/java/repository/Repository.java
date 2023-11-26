@@ -5,7 +5,7 @@ import java.util.List;
 
 import model.entity.Aluno;
 import model.entity.Atividade;
-import model.entity.Matricula;
+import model.entity.MarcacaoHorario;
 import model.entity.Professor;
 import model.entity.Usuario;
 
@@ -17,7 +17,7 @@ public class Repository {
 	private List<Usuario> usuarios = new ArrayList<>();
 	private List<Professor> professores = new ArrayList<>();
 	private List<Atividade> atividades = new ArrayList<>();
-	private List<Matricula> matriculas = new ArrayList<>();
+	private List<MarcacaoHorario> marcacaoHorarios = new ArrayList<>();
 	
 	public static Repository getInstance() {
         if (instance == null) {
@@ -58,12 +58,12 @@ public class Repository {
 		this.atividades.add(atividade);
 	}
 
-	public List<Matricula> getMatriculas() {
-		return matriculas;
+	public List<MarcacaoHorario> getMarcacaoHorarios() {
+		return marcacaoHorarios;
 	}
 
-	public void addMatriculas(Matricula matriculas) {
-		this.matriculas.add(matriculas);
+	public void addMarcacaoHorarios(MarcacaoHorario marcacaoHorarios) {
+		this.marcacaoHorarios.add(marcacaoHorarios);
 	}
 	
 	

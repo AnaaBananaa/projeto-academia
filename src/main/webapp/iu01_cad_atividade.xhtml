@@ -4,13 +4,15 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<title>Atividade</title>
 </h:head>
-<h:body>
+<h:body style="margin:0px auto">
 	<h:form id="form_atividadeMBean">
 		<p:growl id="messages" showDetail="true" />
+		<menu:menu/>
 		<div>
 			<div class="field">
 				<p:outputLabel for="@next" value="Nome"/>
@@ -23,6 +25,11 @@
 					<f:selectItem itemLabel="--" itemValue="" />
 					<f:selectItems value="#{atividadeMBean.diasSemana}" />
 				</p:selectOneMenu>
+			</div>
+			<div>
+				<p:outputLabel for="@next" value="Valor Adicional" />
+				<p:inputText id="valorAdd" styleClass="block"
+					value="#{atividadeMBean.atividade.valorAcrescido}" />
 			</div>
 			<div>
 				<p:outputLabel for="@next" value="Horário Início" />
@@ -38,6 +45,13 @@
 					<f:selectItems value="#{atividadeMBean.horarios}" />
 				</p:selectOneMenu>
 			</div>
+			
+			<p:outputLabel for="@next" value="Professor" />
+			<p:selectOneMenu id="professor_selecionado" class="field"
+				value="#{atividadeMBean.professorSelected}">
+				<f:selectItems value="#{atividadeMBean.professores}" />
+			</p:selectOneMenu>
+			
 			<p:commandButton id="btnSalvar" value="CADASTRAR"
 				action="#{atividadeMBean.cadastrarAtividade()}" update="form_atividadeMBean" />
 		</div>
@@ -45,7 +59,7 @@
 			value="#{atividadeMBean.atividades}" selection="#{atividadeMBean.selectedAtividade}"
 			selectionMode="single" row="20">
 			<f:facet name="header">
-                Atividades Cadastrados
+                Atividades Cadastradas
             </f:facet>
 
 			<p:ajax event="rowSelect" oncomplete="PF('updateAtividadeWV').show()"
@@ -61,6 +75,14 @@
 			
 			<p:column headerText="Horário">
 				<h:outputText value="#{atividade.horarioInicio} - #{atividade.horarioFim}" />
+			</p:column>
+			
+			<p:column headerText="Professor" >
+				<h:outputText value="#{atividade.professor.nome}" />
+			</p:column>
+			
+			<p:column headerText="Valor">
+				<h:outputText value="R$ #{atividade.valorAcrescido}" />
 			</p:column>
 
 		</p:dataTable>
@@ -95,6 +117,13 @@
 						value="#{atividadeMBean.selectedAtividade.horarioFim}">
 						<f:selectItem itemLabel="--" itemValue="" />
 						<f:selectItems value="#{atividadeMBean.horarios}" />
+					</p:selectOneMenu>
+				</div>
+				<div>
+					<p:outputLabel for="@next" value="Professor" />
+					<p:selectOneMenu id="professor_selecionado" class="field"
+						value="#{atividadeMBean.professorSelectedAtt}">
+						<f:selectItems value="#{atividadeMBean.professores}" />
 					</p:selectOneMenu>
 				</div>
 				<p:commandButton id="btnSalvar" value="ATUALIZAR"

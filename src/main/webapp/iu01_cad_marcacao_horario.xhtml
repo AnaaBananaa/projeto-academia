@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:menu="http://java.sun.com/jsf/composite/menu">
+<h:head>
+	<title>Marcação de Horários</title>
+	<style></style>
+</h:head>
+<h:body>
+	<h:form id="form_marcacaoHorarioMBean">
+		<p:growl id="messages" showDetail="true" />
+		<menu:menu/>
+		<div style="width: 100%;">
+
+			<p:outputLabel for="@next" value="Aluno" />
+			<p:selectOneMenu id="aluno_selecionado" class="field"
+				value="#{marcacaoHorarioMBean.alunoSelected}">
+				<f:selectItems value="#{marcacaoHorarioMBean.alunos}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="@next" value="Atividade" />
+			<p:selectOneMenu id="atividade_selecionado" class="field"
+				value="#{marcacaoHorarioMBean.atividadeSelected}">
+				<f:selectItems value="#{marcacaoHorarioMBean.atividades}" />
+			</p:selectOneMenu>
+
+			<p:commandButton id="btnSalvar" value="CADASTRAR"
+				action="#{marcacaoHorarioMBean.cadastrarMarcacaoHorario()}"
+				update="form_marcacaoHorarioMBean" />
+		</div>
+
+		<p:dataTable id="datatable" rowKey="#{marcacaoHorario.id}" var="marcacaoHorario"
+			value="#{marcacaoHorarioMBean.marcacaoHorarios}" selection="#{marcacaoHorarioMBean.selectedMarcacaoHorario}"
+			selectionMode="single" row="20" size="100%">
+			<f:facet name="header">
+                Marcação de Horários Cadastradas
+            </f:facet>
+
+			<p:ajax event="rowSelect" oncomplete="PF('updateMarcacaoHorarioWV').show()"
+				update="form_updateMarcacaoHorario:updateMarcacaoHorario"
+				listener="#{marcacaoHorarioMBean.onRowSelect}" />
+
+			<p:column headerText="Aluno">
+				<h:outputText value="#{marcacaoHorario.aluno.nome}" />
+			</p:column>
+			
+			<p:column headerText="Atividade" >
+				<h:outputText value="#{marcacaoHorario.atividade.nome}" />
+			</p:column>
+			
+		</p:dataTable>
+	</h:form>
+
+	<h:form id="form_updateMarcacaoHorario">
+		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
+			id="updateMarcacaoHorario" widgetVar="updateMarcacaoHorarioWV" responsive="true">
+			<div>
+				<p:outputLabel for="@next" value="Aluno" />
+				<p:selectOneMenu id="aluno_selecionado" class="field"
+					value="#{marcacaoHorarioMBean.alunoSelectedAtt}">
+					<f:selectItems value="#{marcacaoHorarioMBean.alunos}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="@next" value="Atividade" />
+				<p:selectOneMenu id="atividade_selecionado" class="field"
+					value="#{marcacaoHorarioMBean.atividadeSelectedAtt}">
+					<f:selectItems value="#{marcacaoHorarioMBean.atividades}" />
+				</p:selectOneMenu>
+
+				<p:commandButton id="btnAtualizar" value="ATUALIZAR"
+					action="#{marcacaoHorarioMBean.atualizarMarcacaoHorario()}"
+					oncomplete="PF('updateMarcacaoHorarioWV').hide()" update="form_marcacaoHorarioMBean" />
+			</div>
+		</p:dialog>
+	</h:form>
+
+</h:body>
+</html>

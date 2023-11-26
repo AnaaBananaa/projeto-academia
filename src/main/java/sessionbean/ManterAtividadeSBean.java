@@ -15,7 +15,7 @@ public class ManterAtividadeSBean {
 	
 	
 	public void cadastrarAtividade(TOAtividade to) {
-		Atividade atividade = new Atividade(getId(), to.getNome(), to.getDiaSemana(),  to.getHorarioInicio(), to.getHorarioFim());
+		Atividade atividade = new Atividade(getId(), to.getNome(), to.getDiaSemana(),  to.getHorarioInicio(), to.getHorarioFim(), to.getValorAcrescido(), to.getProfessor());
 		repository.addAtividades(atividade);
 		
 	}
@@ -24,7 +24,7 @@ public class ManterAtividadeSBean {
 		List<TOAtividade> tos = new ArrayList<>();
 		List<Atividade> atividades =repository.getAtividades();
 		for(Atividade user: atividades) {
-			tos.add(new TOAtividade(user.getId(), user.getNome(), user.getDiaSemana(),user.getHorarioInicio(), user.getHorarioFim()));
+			tos.add(new TOAtividade(user.getId(), user.getNome(), user.getDiaSemana(),user.getHorarioInicio(), user.getHorarioFim(), user.getValorAcrescido(), user.getProfessor()));
 		}
 		return tos;
 	}
@@ -32,8 +32,13 @@ public class ManterAtividadeSBean {
 	public void atualizarAtividade(TOAtividade usuario) {
 		List<Atividade> atividade =repository.getAtividades();
 		for(Atividade u : atividade) {
-			if(u.getId().equals(usuario.getId())) {
+			if(u.getId().equals(u.getId())) {
 				u.setNome(usuario.getNome());
+				u.setHorarioFim(usuario.getHorarioFim());
+				u.setHorarioInicio(usuario.getHorarioInicio());
+				u.setDiaSemana(usuario.getDiaSemana());
+				u.setValorAcrescido(usuario.getValorAcrescido());
+				u.setProfessor(usuario.getProfessor());
 			}
 		}
 	}

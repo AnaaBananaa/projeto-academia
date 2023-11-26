@@ -4,7 +4,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<title>Hello!</title>
 	<style></style>
@@ -12,6 +13,8 @@
 <h:body>
 	<h:form id="form_alunoMBean">
 		<p:growl id="messages" showDetail="true" />
+		<menu:menu/>
+		
 		<div style="width: 100%;">
 			<div style="float: left;">
 				<p:outputLabel for="nome" value="Nome"/>

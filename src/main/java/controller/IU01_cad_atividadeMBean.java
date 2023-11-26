@@ -8,13 +8,16 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import org.primefaces.event.SelectEvent;
 
 import enums.EnumDiaSemana;
 import enums.EnumHorario;
 import model.transferobject.TOAtividade;
+import model.transferobject.TOProfessor;
 import sessionbean.ManterAtividadeSBean;
+import sessionbean.ManterProfessorSBean;
 
 @ViewScoped
 @ManagedBean(name = "atividadeMBean")
@@ -23,6 +26,11 @@ public class IU01_cad_atividadeMBean {
 	private TOAtividade atividade;
 	private List<TOAtividade> atividades;
 	private TOAtividade selectedAtividade;
+	private String professorSelectedAtt;
+	private String professorSelected;
+	private List<SelectItem> professores = new ArrayList<>();
+	private ManterProfessorSBean professorSbean = new ManterProfessorSBean();
+
 	private List<String> diasSemana = new ArrayList<>();
 	private List<String> horarios = new ArrayList<>();
 	private ManterAtividadeSBean sbean = new ManterAtividadeSBean();
@@ -39,10 +47,14 @@ public class IU01_cad_atividadeMBean {
 		this.atividade = new TOAtividade();
 		this.setAtividades(new ArrayList<>());
 		listarAtividades();
+		populaProfessor();
 	}
 
-	public String getMessage() {
-		return "Primeira Tela";
+	private void populaProfessor() {
+		List<TOProfessor> profs = professorSbean.listarProfessores();
+		for(TOProfessor prof : profs) {
+			professores.add(new SelectItem(prof.getId(), prof.getNome()));
+		}
 	}
 	
 	private void listarAtividades() {
@@ -50,6 +62,7 @@ public class IU01_cad_atividadeMBean {
 	}
 	
 	public void cadastrarAtividade() {
+		atividade.setProfessor(professorSbean.getProfessorById(professorSelected));
 		sbean.cadastrarAtividade(atividade);
 		listarAtividades();
 	}
@@ -59,6 +72,7 @@ public class IU01_cad_atividadeMBean {
 	}
 	
 	public void atualizarAtividade() {
+		selectedAtividade.setProfessor(professorSbean.getProfessorById(professorSelectedAtt));
 		sbean.atualizarAtividade(selectedAtividade);
 		listarAtividades();
 		showInfo();
@@ -111,6 +125,46 @@ public class IU01_cad_atividadeMBean {
 
 	public void setHorarios(List<String> horarios) {
 		this.horarios = horarios;
+	}
+
+	public String getProfessorSelectedAtt() {
+		return professorSelectedAtt;
+	}
+
+	public void setProfessorSelectedAtt(String professorSelectedAtt) {
+		this.professorSelectedAtt = professorSelectedAtt;
+	}
+
+	public String getProfessorSelected() {
+		return professorSelected;
+	}
+
+	public void setProfessorSelected(String professorSelected) {
+		this.professorSelected = professorSelected;
+	}
+
+	public List<SelectItem> getProfessores() {
+		return professores;
+	}
+
+	public void setProfessores(List<SelectItem> professores) {
+		this.professores = professores;
+	}
+
+	public ManterProfessorSBean getProfessorSbean() {
+		return professorSbean;
+	}
+
+	public void setProfessorSbean(ManterProfessorSBean professorSbean) {
+		this.professorSbean = professorSbean;
+	}
+
+	public ManterAtividadeSBean getSbean() {
+		return sbean;
+	}
+
+	public void setSbean(ManterAtividadeSBean sbean) {
+		this.sbean = sbean;
 	}
 	
 }

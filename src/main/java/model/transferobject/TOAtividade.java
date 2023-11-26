@@ -3,14 +3,17 @@ package model.transferobject;
 import java.util.Objects;
 
 public class TOAtividade {
-	String id;
-	String nome;
-	String diaSemana;
-	String horarioInicio;
-	String horarioFim;
-	
+	private String id;
+	private String nome;
+	private String diaSemana;
+	private String horarioInicio;
+	private String horarioFim;
+	private Double valorAcrescido;
+	private TOProfessor professor;
+
 	public TOAtividade() {
 		super();
+		this.valorAcrescido = 0.00;
 	}
 
 	public TOAtividade(String nome) {
@@ -18,13 +21,15 @@ public class TOAtividade {
 		this.nome = nome;
 	}
 	
-	public TOAtividade(String id, String nome, String diaSemana, String horarioInicio, String horarioFim) {
+	public TOAtividade(String id, String nome, String diaSemana, String horarioInicio, String horarioFim, Double valorAcrescido, TOProfessor professor) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.diaSemana = diaSemana;
 		this.horarioInicio = horarioInicio;
 		this.horarioFim = horarioFim;
+		this.valorAcrescido = valorAcrescido;
+		this.professor = professor;
 	}
 
 	public String getId() {
@@ -64,6 +69,14 @@ public class TOAtividade {
 	public void setHorarioFim(String horarioFim) {
 		this.horarioFim = horarioFim;
 	}
+	
+	public Double getValorAcrescido() {
+		return valorAcrescido;
+	}
+
+	public void setValorAcrescido(Double valorAcrescido) {
+		this.valorAcrescido = valorAcrescido;
+	}
 
 	@Override
 	public String toString() {
@@ -72,7 +85,7 @@ public class TOAtividade {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(diaSemana, horarioFim, horarioInicio, id, nome);
+		return Objects.hash(diaSemana, horarioFim, horarioInicio, id, nome, valorAcrescido);
 	}
 
 	@Override
@@ -86,7 +99,15 @@ public class TOAtividade {
 		TOAtividade other = (TOAtividade) obj;
 		return Objects.equals(diaSemana, other.diaSemana) && Objects.equals(horarioFim, other.horarioFim)
 				&& Objects.equals(horarioInicio, other.horarioInicio) && Objects.equals(id, other.id)
-				&& Objects.equals(nome, other.nome);
+				&& Objects.equals(nome, other.nome) && Objects.equals(valorAcrescido, other.valorAcrescido);
 	}
-	
+
+	public TOProfessor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(TOProfessor professor) {
+		this.professor = professor;
+	}
+
 }
