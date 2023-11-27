@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.entity.Aluno;
 import model.transferobject.TOAluno;
-import model.transferobject.TOProfessor;
 import repository.Repository;
 
 public class ManterAlunoSBean {
@@ -15,7 +14,8 @@ public class ManterAlunoSBean {
 	
 	
 	public void cadastrarAluno(TOAluno user) {
-		Aluno aluno = new Aluno(getId(), user.getNome(), user.getDataNascimento(), user.getAtivo(), user.getCelular(), user.getEmail(), user.getCidade(), user.getCEP(), user.getRua(), user.getNumero(), user.getBairro(), user.getEstado(), user.getGenero());
+		Aluno aluno = new Aluno(getId(), user.getNome(), user.getDataNascimento(), user.getAtivo(), user.getCelular(), user.getEmail(),
+				user.getCidade(), user.getCEP(), user.getRua(), user.getNumero(), user.getBairro(), user.getEstado(), user.getGenero(), user.getDataVencimento(), user.getValorMensalidade(), user.getVezesSemana());
 		repository.addAlunos(aluno);
 		
 	}
@@ -24,7 +24,8 @@ public class ManterAlunoSBean {
 		List<TOAluno> tos = new ArrayList<>();
 		List<Aluno> alunos =repository.getAlunos();
 		for(Aluno user: alunos) {
-			tos.add(new TOAluno(user.getId(), user.getNomeAluno(), user.getDataNascimento(), user.getAtivo(), user.getCelular(), user.getEmail(), user.getCidade(), user.getCEP(), user.getRua(), user.getNumero(), user.getBairro(), user.getEstado(), user.getGenero()));
+			tos.add(new TOAluno(user.getId(), user.getNomeAluno(), user.getDataNascimento(), user.getAtivo(), user.getCelular(), user.getEmail(),
+					user.getCidade(), user.getCEP(), user.getRua(), user.getNumero(), user.getBairro(), user.getEstado(), user.getGenero(),  user.getDataVencimento(), user.getValorMensalidade(), user.getVezesSemana()));
 		}
 		
 		return tos;
@@ -44,6 +45,9 @@ public class ManterAlunoSBean {
 				u.setRua(aluno.getRua());
 				u.setNumero(aluno.getNumero());
 				u.setBairro(aluno.getBairro());
+				u.setDataVencimento(aluno.getDataVencimento());
+				u.setValorMensalidade(aluno.getValorMensalidade());
+				u.setVezesSemana(aluno.getVezesSemana());
 			}
 		}
 	}

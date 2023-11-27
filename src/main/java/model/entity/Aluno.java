@@ -1,10 +1,5 @@
 package model.entity;
 
-import java.util.Date;
-
-import enums.EnumEstados;
-import enums.EnumGenero;
-
 public class Aluno {
 
     private String id;
@@ -20,28 +15,36 @@ public class Aluno {
     private String bairro;
     private String genero;
     private String estado;
+    private String dataVencimento;
+    private Double valorMensalidade;
+    private int vezesSemana;
     
     public Aluno() {
     }
 
-    public Aluno(String id, String nomeAluno, String dataNascimento, Boolean ativo, String celular, String email, String cidade, String CEP, String rua, String numero, String bairro, String estado, String genero) {
-        this.id = id;
-        this.nomeAluno = nomeAluno;
-        this.dataNascimento = dataNascimento;
-        this.ativo = ativo;
-        this.celular = celular;
-        this.email = email;
-        this.cidade = cidade;
-        this.CEP = CEP;
-        this.rua = rua;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.genero = genero;
-        this.estado = estado;
-    }
+    public Aluno(String id, String nomeAluno, String dataNascimento, Boolean ativo, String celular, String email,
+			String cidade, String cEP, String rua, String numero, String bairro, String genero, String estado,
+			String dataVencimento, Double valorMensalidade, int vezesSemana) {
+		super();
+		this.id = id;
+		this.nomeAluno = nomeAluno;
+		this.dataNascimento = dataNascimento;
+		this.ativo = ativo;
+		this.celular = celular;
+		this.email = email;
+		this.cidade = cidade;
+		CEP = cEP;
+		this.rua = rua;
+		this.numero = numero;
+		this.bairro = bairro;
+		this.genero = genero;
+		this.estado = estado;
+		this.dataVencimento = dataVencimento;
+		this.valorMensalidade = valorMensalidade;
+		this.vezesSemana = vezesSemana;
+	}
 
-
-    public String getId() {
+	public String getId() {
         return id;
     }
 
@@ -193,5 +196,29 @@ public class Aluno {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getDataVencimento() {
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(String dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+	public Double getValorMensalidade() {
+		return valorMensalidade;
+	}
+
+	public void setValorMensalidade(Double valorMensalidade) {
+		this.valorMensalidade = valorMensalidade;
+	}
+
+	public int getVezesSemana() {
+		return vezesSemana;
+	}
+
+	public void setVezesSemana(int vezesSemana) {
+		this.vezesSemana = vezesSemana;
 	}
 }

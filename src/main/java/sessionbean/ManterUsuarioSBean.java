@@ -39,6 +39,17 @@ public class ManterUsuarioSBean {
 		}
 	}
 	
+	public boolean encontrarUsuario(String nome, String senha) {
+		List<Usuario> usuarios =repository.getUsuarios();
+		for(Usuario u : usuarios) {
+			if(u.getNome().equals(nome) && u.getSenha().equals(senha)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	private String getId() {
 		id = id+1;
 		return "A"+id;

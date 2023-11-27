@@ -8,12 +8,10 @@ public class TOAtividade {
 	private String diaSemana;
 	private String horarioInicio;
 	private String horarioFim;
-	private Double valorAcrescido;
 	private TOProfessor professor;
 
 	public TOAtividade() {
 		super();
-		this.valorAcrescido = 0.00;
 	}
 
 	public TOAtividade(String nome) {
@@ -21,14 +19,13 @@ public class TOAtividade {
 		this.nome = nome;
 	}
 	
-	public TOAtividade(String id, String nome, String diaSemana, String horarioInicio, String horarioFim, Double valorAcrescido, TOProfessor professor) {
+	public TOAtividade(String id, String nome, String diaSemana, String horarioInicio, String horarioFim, TOProfessor professor) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.diaSemana = diaSemana;
 		this.horarioInicio = horarioInicio;
 		this.horarioFim = horarioFim;
-		this.valorAcrescido = valorAcrescido;
 		this.professor = professor;
 	}
 
@@ -70,14 +67,6 @@ public class TOAtividade {
 		this.horarioFim = horarioFim;
 	}
 	
-	public Double getValorAcrescido() {
-		return valorAcrescido;
-	}
-
-	public void setValorAcrescido(Double valorAcrescido) {
-		this.valorAcrescido = valorAcrescido;
-	}
-
 	@Override
 	public String toString() {
 		return nome + ", " + horarioInicio + " - " + horarioFim;
@@ -85,7 +74,7 @@ public class TOAtividade {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(diaSemana, horarioFim, horarioInicio, id, nome, valorAcrescido);
+		return Objects.hash(diaSemana, horarioFim, horarioInicio, id, nome);
 	}
 
 	@Override
@@ -99,7 +88,7 @@ public class TOAtividade {
 		TOAtividade other = (TOAtividade) obj;
 		return Objects.equals(diaSemana, other.diaSemana) && Objects.equals(horarioFim, other.horarioFim)
 				&& Objects.equals(horarioInicio, other.horarioInicio) && Objects.equals(id, other.id)
-				&& Objects.equals(nome, other.nome) && Objects.equals(valorAcrescido, other.valorAcrescido);
+				&& Objects.equals(nome, other.nome);
 	}
 
 	public TOProfessor getProfessor() {

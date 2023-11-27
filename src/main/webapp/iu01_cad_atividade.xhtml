@@ -27,11 +27,6 @@
 				</p:selectOneMenu>
 			</div>
 			<div>
-				<p:outputLabel for="@next" value="Valor Adicional" />
-				<p:inputText id="valorAdd" styleClass="block"
-					value="#{atividadeMBean.atividade.valorAcrescido}" />
-			</div>
-			<div>
 				<p:outputLabel for="@next" value="Horário Início" />
 				<p:selectOneMenu id="inicio" value="#{atividadeMBean.atividade.horarioInicio}">
 					<f:selectItem itemLabel="--" itemValue="" />
@@ -81,10 +76,6 @@
 				<h:outputText value="#{atividade.professor.nome}" />
 			</p:column>
 			
-			<p:column headerText="Valor">
-				<h:outputText value="R$ #{atividade.valorAcrescido}" />
-			</p:column>
-
 		</p:dataTable>
 	</h:form>
 

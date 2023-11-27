@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:menu="http://java.sun.com/jsf/composite/menu">
+<h:head>
+	<title>Produto</title>
+</h:head>
+<h:body>
+	<h:form id="form_produtoMBean">
+		<p:growl id="messages" showDetail="true" />
+		<menu:menu/>
+		<div>
+			<div class="field">
+				<p:outputLabel for="nome">Nome</p:outputLabel>
+				<p:inputText id="nome" styleClass="block" required="true"
+					value="#{produtoMBean.produto.nome}" />
+			</div>
+			
+			<div class="field">
+				<p:outputLabel for="@next">Quantidade</p:outputLabel>
+				<p:inputNumber id="quantidade" styleClass="block"  required="true"
+					value="#{produtoMBean.produto.quantidade}" />
+			</div>
+			<div class="field">
+				<p:outputLabel for="@next">Preço</p:outputLabel>
+				<p:inputNumber id="preco" styleClass="block" symbol="R$"  required="true"
+					value="#{produtoMBean.produto.preco}" />
+			</div>
+			<p:commandButton id="btnSalvar" value="CADASTRAR"
+				action="#{produtoMBean.cadastrarProduto()}" update="form_produtoMBean" />
+		</div>
+		<p:dataTable id="datatable" rowKey="#{produto.nome}" var="produto"
+			value="#{produtoMBean.produtos}" selection="#{produtoMBean.selectedProduto}"
+			selectionMode="single" row="20">
+			<f:facet name="header">
+                Produtos Cadastrados
+            </f:facet>
+
+			<p:ajax event="rowSelect" oncomplete="PF('updateProdutoWV').show()"
+				update="form_updateProduto:updateProduto" listener="#{produtoMBean.onRowSelect}" />
+
+			<p:column headerText="Produto">
+				<h:outputText value="#{produto.nome}" />
+			</p:column>
+			
+			<p:column headerText="Quantidade">
+				<h:outputText value="#{produto.quantidade}" />
+			</p:column>
+			
+			<p:column headerText="Preço">
+				<h:outputText value="R$ #{produto.preco}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+
+	<h:form id="form_updateProduto">
+		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
+			id="updateProduto" widgetVar="updateProdutoWV" responsive="true">
+			<div>
+				<div class="field">
+					<p:outputLabel for="nome">Nome</p:outputLabel>
+					<p:inputText id="nome" styleClass="block"
+						value="#{produtoMBean.selectedProduto.nome}" />
+				</div>
+				<div class="field">
+				<p:outputLabel for="@next">Quantidade</p:outputLabel>
+				<p:inputNumber id="quantidade" styleClass="block"
+					value="#{produtoMBean.selectedProduto.quantidade}" />
+			</div>
+			<div class="field">
+				<p:outputLabel for="@next">Preço</p:outputLabel>
+				<p:inputNumber id="preco" styleClass="block" symbol="R$"
+					value="#{produtoMBean.selectedProduto.preco}" />
+			</div>
+				<p:commandButton id="btnSalvar" value="ATUALIZAR"
+					action="#{produtoMBean.atualizarProduto()}" oncomplete="PF('updateProdutoWV').hide()" update="form_produtoMBean"/>
+			</div>
+		</p:dialog>
+	</h:form>
+
+</h:body>
+</html>

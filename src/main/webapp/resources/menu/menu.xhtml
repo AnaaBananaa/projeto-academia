@@ -18,11 +18,20 @@
 			<p:menuitem value="HORÁRIOS"
 				url="iu01_cad_marcacao_horario.jsf" />
 			<p:menuitem value="USUÁRIOS"
-				url="index.jsf" />
-<!-- 			<f:facet name="options"> -->
-<!-- 				<a href="iu01_00.jsf"><p:button value="Logout" icon="pi pi-fw pi-sign-out" -->
-<!-- 					styleClass="ui-button-info" url="index.jsf" /></a> -->
-<!-- 			</f:facet> -->
+				url="iu01_cad_usuario.jsf" />
+				
+			<p:menuitem value="PRODUTOS"
+				url="iu01_cad_produto.jsf" />
+			
+			<p:menuitem value="VENDAS"
+				url="iu01_cad_compra.jsf" />
+			
+			<p:menuitem value="MENSALIDADES"
+				url="iu01_cad_mensalidade.jsf" />
+			<f:facet name="options">
+				<a href="index.jsf"><p:button icon="pi pi-fw pi-sign-out"
+					styleClass="ui-button-info" url="index.jsf" /></a>
+			</f:facet>
 		</p:menubar>
 	</composite:implementation>
 </h:body>

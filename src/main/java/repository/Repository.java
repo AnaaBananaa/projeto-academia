@@ -5,7 +5,9 @@ import java.util.List;
 
 import model.entity.Aluno;
 import model.entity.Atividade;
+import model.entity.Compra;
 import model.entity.MarcacaoHorario;
+import model.entity.Produto;
 import model.entity.Professor;
 import model.entity.Usuario;
 
@@ -18,6 +20,8 @@ public class Repository {
 	private List<Professor> professores = new ArrayList<>();
 	private List<Atividade> atividades = new ArrayList<>();
 	private List<MarcacaoHorario> marcacaoHorarios = new ArrayList<>();
+	private List<Produto> produtos = new ArrayList<>();
+	private List<Compra> compras = new ArrayList<>();
 	
 	public static Repository getInstance() {
         if (instance == null) {
@@ -66,5 +70,20 @@ public class Repository {
 		this.marcacaoHorarios.add(marcacaoHorarios);
 	}
 	
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void addProduto(Produto produto) {
+		this.produtos.add(produto);
+	}
+
+	public List<Compra> getCompras() {
+		return compras;
+	}
+	
+	public void addCompra(Compra compra) {
+		this.compras.add(compra);
+	}
 	
 }

@@ -29,6 +29,7 @@ public class IU01_cad_alunoMBean {
 	private ManterAlunoSBean sbean = new ManterAlunoSBean();
 	private List<EnumGenero> generos = new ArrayList<>();
 	private List<EnumEstados> ufs = new ArrayList<>();
+	private List<Integer> vezesSemana = new ArrayList<>();
 
 	public IU01_cad_alunoMBean() {
 		this.aluno = new TOAluno();
@@ -36,6 +37,39 @@ public class IU01_cad_alunoMBean {
 		this.setGeneros(Arrays.asList(EnumGenero.values()));
 		this.setUfs(Arrays.asList(EnumEstados.values()));
 		listarAlunos();
+		listSemana();
+	}
+	
+	private void listSemana() {
+		vezesSemana.add(1);
+		vezesSemana.add(3);
+		vezesSemana.add(5);
+		vezesSemana.add(7);
+	}
+	
+	public void atualizarMensalidade(SelectEvent event) {
+		int valorEscolhido = (int) event.getObject();
+		switch (valorEscolhido) {
+		case 1: {
+			aluno.setValorMensalidade(100.00);
+			break;
+		}
+		case 3: {
+			aluno.setValorMensalidade(180.00);
+			break;
+		}
+		case 5: {
+			aluno.setValorMensalidade(240.00);
+			break;
+		}
+		case 7: {
+			aluno.setValorMensalidade(300.00);
+			break;
+		}
+		default:
+			aluno.setValorMensalidade(100.00);
+			break;
+		}
 	}
 
 	public String getMessage() {
@@ -47,8 +81,20 @@ public class IU01_cad_alunoMBean {
 	}
 	
 	public void cadastrarAluno() throws ParseException {
-		sbean.cadastrarAluno(aluno);
-		listarAlunos();
+		boolean hasequals = false;
+		for(TOAluno a : alunos)
+		{
+			if(a.equals(aluno)){
+				hasequals = true;
+			}
+		}
+		if(hasequals) {
+			showError("Cadastro não realizado", "Já existe um usuário com essas informações no sistema");
+		}else {
+			sbean.cadastrarAluno(aluno);
+			listarAlunos();
+		}
+		
 	}
 	
 	public void onRowSelect(SelectEvent<?> event){
@@ -68,6 +114,10 @@ public class IU01_cad_alunoMBean {
 
     public void showInfo() {
         addMessage(FacesMessage.SEVERITY_INFO, "Atualização de dados", "Dados salvos com sucesso");
+    }
+    
+    public void showError(String title, String message) {
+        addMessage(FacesMessage.SEVERITY_INFO, title, message);
     }
 	
 	public TOAluno getAluno() {
@@ -108,6 +158,14 @@ public class IU01_cad_alunoMBean {
 
 	public void setUfs(List<EnumEstados> ufs) {
 		this.ufs = ufs;
+	}
+
+	public List<Integer> getVezesSemana() {
+		return vezesSemana;
+	}
+
+	public void setVezesSemana(List<Integer> vezesSemana) {
+		this.vezesSemana = vezesSemana;
 	}
 	
 }

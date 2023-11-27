@@ -33,7 +33,7 @@
 				update="form_marcacaoHorarioMBean" />
 		</div>
 
-		<p:dataTable id="datatable" rowKey="#{marcacaoHorario.id}" var="marcacaoHorario"
+		<p:dataTable id="datatable" rowKey="#{marcacaoHorario.id}" var="marcacaoHorario" style="width: 100%;height: 400px; overflow: scroll;"
 			value="#{marcacaoHorarioMBean.marcacaoHorarios}" selection="#{marcacaoHorarioMBean.selectedMarcacaoHorario}"
 			selectionMode="single" row="20" size="100%">
 			<f:facet name="header">

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:menu="http://java.sun.com/jsf/composite/menu">
+<h:head>
+	<title>Compras</title>
+	<style></style>
+</h:head>
+<h:body>
+	<h:form id="form_compraMBean">
+		<p:growl id="messages" showDetail="true" />
+		<menu:menu/>
+		<div style="width: 100%;">
+
+			<p:outputLabel for="@next" value="Aluno" />
+			<p:selectOneMenu id="aluno_selecionado" class="field"
+				value="#{compraMBean.alunoSelected}">
+				<f:selectItems value="#{compraMBean.alunos}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="@next" value="Produto" />
+			<p:selectOneMenu id="produto_selecionado" class="field"
+				value="#{compraMBean.produtoSelected}">
+				<f:selectItems value="#{compraMBean.produtos}" />
+			</p:selectOneMenu>
+			
+			<div class="field">
+				<p:outputLabel for="@next">Quantidade</p:outputLabel>
+				<p:inputNumber id="quantidade" styleClass="block"  required="true"
+					value="#{compraMBean.compra.quantidade}" />
+			</div>
+
+			<p:commandButton id="btnSalvar" value="CADASTRAR"
+				action="#{compraMBean.cadastrarCompra()}"
+				update="form_compraMBean" />
+		</div>
+
+		<p:dataTable id="datatable" rowKey="#{compra.id}" var="compra" style="width: 100%;height: 400px; overflow: scroll;"
+			value="#{compraMBean.compras}" selection="#{compraMBean.selectedCompra}"
+			selectionMode="single" row="20" size="100%">
+			<f:facet name="header">
+               	Compras Registradas
+            </f:facet>
+
+			<p:column headerText="Aluno">
+				<h:outputText value="#{compra.aluno.nome}" />
+			</p:column>
+			
+			<p:column headerText="Produto" >
+				<h:outputText value="#{compra.produto.nome}" />
+			</p:column>
+			
+			<p:column headerText="Quantidade" >
+				<h:outputText value="#{compra.quantidade}" />
+			</p:column>
+			
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

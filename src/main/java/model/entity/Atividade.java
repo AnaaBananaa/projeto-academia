@@ -9,12 +9,10 @@ public class Atividade {
 	private String diaSemana;
 	private String horarioInicio;
 	private String horarioFim;
-	private Double valorAcrescido;
 	private TOProfessor professor;
 	
 	public Atividade() {
 		super();
-		this.valorAcrescido = 0.00;
 	}
 
 	public Atividade(String nome) {
@@ -22,14 +20,13 @@ public class Atividade {
 		this.nome = nome;
 	}
 	
-	public Atividade(String id, String nome, String diaSemana, String horarioInicio, String horarioFim, Double valorAcrescido, TOProfessor professor) {
+	public Atividade(String id, String nome, String diaSemana, String horarioInicio, String horarioFim, TOProfessor professor) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.diaSemana = diaSemana;
 		this.horarioInicio = horarioInicio;
 		this.horarioFim = horarioFim;
-		this.valorAcrescido = valorAcrescido;
 		this.professor = professor;
 	}
 
@@ -69,14 +66,6 @@ public class Atividade {
 
 	public void setHorarioFim(String horarioFim) {
 		this.horarioFim = horarioFim;
-	}
-
-	public Double getValorAcrescido() {
-		return valorAcrescido;
-	}
-
-	public void setValorAcrescido(Double valorAcrescido) {
-		this.valorAcrescido = valorAcrescido;
 	}
 
 	public TOProfessor getProfessor() {

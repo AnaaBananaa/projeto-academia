@@ -69,10 +69,32 @@ public class IU01_cad_marcacao_horarioMBean {
 	}
 	
 	public void cadastrarMarcacaoHorario() {
-		marcacaoHorario.setAluno(alunoSbean.getAlunoById(alunoSelected));
-		marcacaoHorario.setAtividade(atividadeSBean.getAtividadeById(atividadeSelected));
-		sbean.cadastrarMarcacaoHorario(marcacaoHorario);
-		listarMarcacaoHorarioes();
+		int count = 0;
+		boolean temhorario = false;
+		TOAluno aluno = alunoSbean.getAlunoById(alunoSelected);
+		TOAtividade atividade = atividadeSBean.getAtividadeById(atividadeSelected);
+		for(TOMarcacaoHorario matricula : marcacaoHorarios) {
+			if(matricula.getAluno().getId().equals(aluno.getId())) {
+				count +=1;
+				if(matricula.getAtividade().getHorarioInicio().equals(atividade.getHorarioInicio())) {
+					temhorario = true;
+				}
+			}
+		}if(temhorario) {
+			showError("Cadastro não realizado",
+					"Aluno selecionado já tem uma atividade neste horário.");
+		} else {
+			if (count < aluno.getVezesSemana()) {
+				marcacaoHorario.setAluno(aluno);
+				marcacaoHorario.setAtividade(atividade);
+				sbean.cadastrarMarcacaoHorario(marcacaoHorario);
+				listarMarcacaoHorarioes();
+				showInfo("Cadastro realizado", "Marcação efetuada com sucesso");
+			} else {
+				showError("Cadastro não realizado",
+						"Aluno selecionado já tem todas as atividades cadastradas para a quantidade de vezes por semana cadastrada.");
+			}
+		}
 	}
 	
 	public void onRowSelect(SelectEvent<?> event){
@@ -85,7 +107,7 @@ public class IU01_cad_marcacao_horarioMBean {
 		selectedMarcacaoHorario.setAtividade(atividadeSBean.getAtividadeById(atividadeSelectedAtt));
 		sbean.atualizarMarcacaoHorario(selectedMarcacaoHorario);
 		listarMarcacaoHorarioes();
-		showInfo();
+		showInfo("Atualização de dados", "Dados salvos com sucesso");
 	}
 	
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
@@ -93,8 +115,12 @@ public class IU01_cad_marcacao_horarioMBean {
                 addMessage(null, new FacesMessage(severity, summary, detail));
     }
 
-    public void showInfo() {
-        addMessage(FacesMessage.SEVERITY_INFO, "Atualização de dados", "Dados salvos com sucesso");
+    public void showInfo(String title, String message) {
+        addMessage(FacesMessage.SEVERITY_INFO, title, message);
+    }
+    
+    public void showError(String title, String message) {
+        addMessage(FacesMessage.SEVERITY_ERROR, title, message);
     }
 
 	public TOMarcacaoHorario getMarcacaoHorario() {

@@ -17,25 +17,34 @@ public class TOAluno {
     private String bairro;
     private String genero;
     private String estado;
+    private String dataVencimento;
+    private Double valorMensalidade;
+    private int vezesSemana;
     
     public TOAluno() {
     }
 
-    public TOAluno(String id, String nome, String dataNascimento, Boolean ativo, String celular, String email, String cidade, String CEP, String rua, String numero, String bairro, String estado, String genero) {
-        this.id = id;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.ativo = ativo;
-        this.celular = celular;
-        this.email = email;
-        this.cidade = cidade;
-        this.CEP = CEP;
-        this.rua = rua;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.genero = genero;
-        this.estado = estado;
-    }
+    public TOAluno(String id, String nomeAluno, String dataNascimento, Boolean ativo, String celular, String email,
+			String cidade, String cEP, String rua, String numero, String bairro, String genero, String estado,
+			String dataVencimento, Double valorMensalidade, int vezesSemana) {
+		super();
+		this.id = id;
+		this.nome = nomeAluno;
+		this.dataNascimento = dataNascimento;
+		this.ativo = ativo;
+		this.celular = celular;
+		this.email = email;
+		this.cidade = cidade;
+		CEP = cEP;
+		this.rua = rua;
+		this.numero = numero;
+		this.bairro = bairro;
+		this.genero = genero;
+		this.estado = estado;
+		this.dataVencimento = dataVencimento;
+		this.valorMensalidade = valorMensalidade;
+		this.vezesSemana = vezesSemana;
+	}
 
 
     public String getId() {
@@ -196,6 +205,30 @@ public class TOAluno {
 	public String toString() {
 		return  nome + ", " + dataNascimento;
 	}
+	
+	public String getDataVencimento() {
+		return dataVencimento;
+	}
+
+	public void setDataVencimento(String dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+
+	public Double getValorMensalidade() {
+		return valorMensalidade;
+	}
+
+	public void setValorMensalidade(Double valorMensalidade) {
+		this.valorMensalidade = valorMensalidade;
+	}
+
+	public int getVezesSemana() {
+		return vezesSemana;
+	}
+
+	public void setVezesSemana(int vezesSemana) {
+		this.vezesSemana = vezesSemana;
+	}
 
 	@Override
 	public int hashCode() {
@@ -212,13 +245,10 @@ public class TOAluno {
 		if (getClass() != obj.getClass())
 			return false;
 		TOAluno other = (TOAluno) obj;
-		return Objects.equals(CEP, other.CEP) && Objects.equals(ativo, other.ativo)
-				&& Objects.equals(bairro, other.bairro) && Objects.equals(celular, other.celular)
-				&& Objects.equals(cidade, other.cidade) && Objects.equals(dataNascimento, other.dataNascimento)
-				&& Objects.equals(email, other.email) && Objects.equals(estado, other.estado)
-				&& Objects.equals(genero, other.genero) && Objects.equals(id, other.id)
-				&& Objects.equals(nome, other.nome) && Objects.equals(numero, other.numero)
-				&& Objects.equals(rua, other.rua);
+		return  Objects.equals(celular, other.celular)
+				&& Objects.equals(dataNascimento, other.dataNascimento)
+				&& Objects.equals(email, other.email)
+				&& Objects.equals(nome, other.nome);
 	}
 
 }
