@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import model.transferobject.TOUsuario;
+import repository.Repository;
 import sessionbean.ManterUsuarioSBean;
 
 @ViewScoped
@@ -16,15 +17,16 @@ public class IU01_loginMBean {
 	public boolean entrou;
 	TOUsuario usuario = new TOUsuario();
 	private ManterUsuarioSBean sbean = new ManterUsuarioSBean();
+	private Repository repository = Repository.getInstance();
 
 	public IU01_loginMBean() {
-		entrou = false;
+		repository.setEntrou(false);
 		sbean.cadastrarUsuario(new TOUsuario("admin", "admin"));
 	}
 	
 	public void entrar() throws IOException {
 		if(sbean.encontrarUsuario(usuario.getNome(), usuario.getSenha())) {
-			entrou = true;
+			repository.setEntrou(true);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("iu01_cad_aluno.jsf");
 		}else {
 			showError("CREDENCIAIS INVÁLIDAS", "Usuário ou senha inválidos");

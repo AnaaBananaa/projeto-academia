@@ -22,6 +22,7 @@ public class Repository {
 	private List<MarcacaoHorario> marcacaoHorarios = new ArrayList<>();
 	private List<Produto> produtos = new ArrayList<>();
 	private List<Compra> compras = new ArrayList<>();
+	private boolean entrou;
 	
 	public static Repository getInstance() {
         if (instance == null) {
@@ -84,6 +85,14 @@ public class Repository {
 	
 	public void addCompra(Compra compra) {
 		this.compras.add(compra);
+	}
+
+	public boolean isEntrou() {
+		return entrou;
+	}
+
+	public void setEntrou(boolean entrou) {
+		this.entrou = entrou;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import model.transferobject.TOProduto;
+import repository.Repository;
 import sessionbean.ManterProdutoSBean;
 
 @ViewScoped
@@ -22,7 +24,10 @@ public class IU01_cad_produtoMBean {
 	private TOProduto selectedProduto;
 	private ManterProdutoSBean sbean = new ManterProdutoSBean();
 
-	public IU01_cad_produtoMBean() {
+	public IU01_cad_produtoMBean()  throws IOException {
+		if(!Repository.getInstance().isEntrou()) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+		}
 		this.produto = new TOProduto();
 		this.setProdutos(new ArrayList<>());
 		listarProdutos();
@@ -43,9 +48,13 @@ public class IU01_cad_produtoMBean {
 				hasEquals = true;
 			}
 		}
-		if(hasEquals) {
+		if (hasEquals) {
 			showError("Cadastro não efetuado", "Já existe um produto com este nome");
-		}else {
+		} else if (produto.getQuantidade() < 1) {
+			showError("Cadastro não efetuado", "Quantidade precisa ser superior a 0");
+		} else if (produto.getPreco() < 0.01) {
+			showError("Cadastro não efetuado", "Preço precisa ser superior a R$0,00");
+		} else {
 			sbean.cadastrarProduto(produto);
 			listarProdutos();
 		}

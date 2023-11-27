@@ -17,13 +17,13 @@
 		<div style="width: 100%;">
 
 			<p:outputLabel for="@next" value="Aluno" />
-			<p:selectOneMenu id="aluno_selecionado" class="field"
+			<p:selectOneMenu id="aluno_selecionado" class="field" required="true"
 				value="#{marcacaoHorarioMBean.alunoSelected}">
 				<f:selectItems value="#{marcacaoHorarioMBean.alunos}" />
 			</p:selectOneMenu>
 
 			<p:outputLabel for="@next" value="Atividade" />
-			<p:selectOneMenu id="atividade_selecionado" class="field"
+			<p:selectOneMenu id="atividade_selecionado" class="field" required="true"
 				value="#{marcacaoHorarioMBean.atividadeSelected}">
 				<f:selectItems value="#{marcacaoHorarioMBean.atividades}" />
 			</p:selectOneMenu>

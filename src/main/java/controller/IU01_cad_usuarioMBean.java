@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import model.transferobject.TOUsuario;
+import repository.Repository;
 import sessionbean.ManterUsuarioSBean;
 
 @ViewScoped
@@ -22,7 +24,10 @@ public class IU01_cad_usuarioMBean {
 	private TOUsuario selectedUsuario;
 	private ManterUsuarioSBean sbean = new ManterUsuarioSBean();
 
-	public IU01_cad_usuarioMBean() {
+	public IU01_cad_usuarioMBean() throws IOException {
+		if(!Repository.getInstance().isEntrou()) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+		}
 		this.usuario = new TOUsuario();
 		this.setUsuarios(new ArrayList<>());
 		listarUsuarios();

@@ -14,15 +14,53 @@
 	<h:form id="form_mensalidadeMBean">
 		<p:growl id="messages" showDetail="true" />
 		<menu:menu/>
-		<p:card style="width: 25em">
-			<p:outputLabel for="@next" value="Aluno" />
-			<p:selectOneMenu id="aluno_selecionado" class="field"
-				value="#{mensalidadeMBean.alunoSelected}">
-				<f:selectItems value="#{mensalidadeMBean.alunos}" />
-			</p:selectOneMenu>
+		<p:card style="width: 35em">
+			<div>
+				<p:outputLabel for="@next" value="Aluno" />
+				<p:selectOneMenu id="aluno_selecionado" class="field"
+					value="#{mensalidadeMBean.alunoSelected}" style="width: 25em">
+					<p:ajax event="itemSelect"
+						update="form_mensalidadeMBean:datatable,form_mensalidadeMBean:somatorio,form_mensalidadeMBean:mens, form_mensalidadeMBean:btnSalvar"
+						listener="#{mensalidadeMBean.resgatarPagamento}" />
+					<f:selectItem itemLabel="--" itemValue="" />
+					<f:selectItems value="#{mensalidadeMBean.alunos}" />
+				</p:selectOneMenu>
+				<p:dataTable id="datatable" widgetVar="data"
+					style="width: 30em;height:300px; overflow-y: scroll;"
+					rowKey="#{compra.aluno.nome}" var="compra"
+					value="#{mensalidadeMBean.comprasDoAluno}" row="10">
+					<f:facet name="header">
+                Compras do Aluno
+           		 </f:facet>
+					<p:column headerText="Produto">
+						<h:outputText value="#{compra.produto.nome}" />
+					</p:column>
 
-			<p:commandButton id="btnSalvar" value="CONFIRMAR PAGAMENTO"
-				action="#{mensalidadeMBean.finalizarPagamento()}" update="form_mensalidadeMBean" />
+					<p:column headerText="Quantidade">
+						<h:outputText value="#{compra.quantidade}" />
+					</p:column>
+
+					<p:column headerText="Data da Compra">
+						<h:outputText value="#{compra.dataCompra}" />
+					</p:column>
+				</p:dataTable>
+				<p:toggleSwitch value="#{mensalidadeMBean.considerarMensalidade}"
+					onIcon="pi pi-check" offIcon="pi pi-times" id="mens"
+					disabled="#{mensalidadeMBean.alunoRetornado()}">
+					<p:ajax listener="#{mensalidadeMBean.adicionarMensalidade}"
+						update="form_mensalidadeMBean:somatorio" />
+				</p:toggleSwitch>
+				<h:outputText value="Incluir Mensalidade" />
+			</div>
+			<div style="float: left;">
+				<p:outputLabel for="@next" value="Total do mês" />
+				<p:inputText id="somatorio" value="R$ #{mensalidadeMBean.somatorio}"
+					disabled="true" />
+					</div>
+				<p:commandButton id="btnSalvar" value="CONFIRMAR PAGAMENTO"
+					action="#{mensalidadeMBean.finalizarPagamento()}" disabled="#{mensalidadeMBean.alunoRetornado()}"
+					update="form_mensalidadeMBean" />
+			
 		</p:card>
 	</h:form>
 

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,8 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import model.transferobject.TOProfessor;
-import model.transferobject.TOUsuario;
+import repository.Repository;
 import sessionbean.ManterProfessorSBean;
-import sessionbean.ManterUsuarioSBean;
 
 @ViewScoped
 @ManagedBean(name = "professorMBean")
@@ -24,7 +24,10 @@ public class IU01_cad_professorMBean {
 	private TOProfessor selectedProfessor;
 	private ManterProfessorSBean sbean = new ManterProfessorSBean();
 
-	public IU01_cad_professorMBean() {
+	public IU01_cad_professorMBean() throws IOException {
+		if(!Repository.getInstance().isEntrou()) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+		}
 		this.professor = new TOProfessor();
 		this.setProfessores(new ArrayList<>());
 		listarProfessores();

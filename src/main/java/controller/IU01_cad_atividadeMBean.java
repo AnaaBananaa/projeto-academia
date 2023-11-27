@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,7 @@ import enums.EnumDiaSemana;
 import enums.EnumHorario;
 import model.transferobject.TOAtividade;
 import model.transferobject.TOProfessor;
+import repository.Repository;
 import sessionbean.ManterAtividadeSBean;
 import sessionbean.ManterProfessorSBean;
 
@@ -35,7 +37,10 @@ public class IU01_cad_atividadeMBean {
 	private List<String> horarios = new ArrayList<>();
 	private ManterAtividadeSBean sbean = new ManterAtividadeSBean();
 
-	public IU01_cad_atividadeMBean() {
+	public IU01_cad_atividadeMBean() throws IOException {
+		if(!Repository.getInstance().isEntrou()) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+		}
 		List<EnumDiaSemana> semanas = Arrays.asList(EnumDiaSemana.values());
 		for(EnumDiaSemana e : semanas) {
 			this.diasSemana.add(e.getDiaSemana());

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.faces.model.SelectItem;
 import model.transferobject.TOAluno;
 import model.transferobject.TOCompra;
 import model.transferobject.TOProduto;
+import repository.Repository;
 import sessionbean.ManterAlunoSBean;
 import sessionbean.ManterCompraSBean;
 import sessionbean.ManterProdutoSBean;
@@ -33,7 +35,10 @@ public class IU01_cad_compraMBean {
 	private ManterAlunoSBean alunoSbean = new ManterAlunoSBean();
 	private ManterProdutoSBean produtoSBean = new ManterProdutoSBean();
 
-	public IU01_cad_compraMBean() {
+	public IU01_cad_compraMBean()  throws IOException {
+		if(!Repository.getInstance().isEntrou()) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+		}
 		this.compra = new TOCompra();
 		this.setCompraes(new ArrayList<>());
 		listarCompras();
@@ -48,7 +53,7 @@ public class IU01_cad_compraMBean {
 	private void populaAtividade() {
 		List<TOProduto> lista = produtoSBean.listarProdutos();
 		for(TOProduto att : lista) {
-			produtos.add(new SelectItem(att.getId(), att.getNome() +" "+ att.getPreco() +" - "+ att.getQuantidade()));
+			produtos.add(new SelectItem(att.getId(), att.getNome() +" - R$"+ att.getPreco()));
 		}
 	}
 	

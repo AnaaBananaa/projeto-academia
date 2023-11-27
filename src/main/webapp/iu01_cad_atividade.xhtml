@@ -17,32 +17,32 @@
 			<div class="field">
 				<p:outputLabel for="@next" value="Nome"/>
 				<p:inputText id="nome" styleClass="block"
-					value="#{atividadeMBean.atividade.nome}" />
+					value="#{atividadeMBean.atividade.nome}" required="true"/>
 			</div>
 			<div>
 				<p:outputLabel for="@next" value="Dia da Semana" />
-				<p:selectOneMenu id="diaSemana" value="#{atividadeMBean.atividade.diaSemana}">
+				<p:selectOneMenu id="diaSemana" value="#{atividadeMBean.atividade.diaSemana}" required="true">
 					<f:selectItem itemLabel="--" itemValue="" />
 					<f:selectItems value="#{atividadeMBean.diasSemana}" />
 				</p:selectOneMenu>
 			</div>
 			<div>
 				<p:outputLabel for="@next" value="Horário Início" />
-				<p:selectOneMenu id="inicio" value="#{atividadeMBean.atividade.horarioInicio}">
+				<p:selectOneMenu id="inicio" value="#{atividadeMBean.atividade.horarioInicio}" required="true">
 					<f:selectItem itemLabel="--" itemValue="" />
 					<f:selectItems value="#{atividadeMBean.horarios}" />
 				</p:selectOneMenu>
 			</div>
 			<div>
 				<p:outputLabel for="@next" value="Horário Fim" />
-				<p:selectOneMenu id="fim" value="#{atividadeMBean.atividade.horarioFim}">
+				<p:selectOneMenu id="fim" value="#{atividadeMBean.atividade.horarioFim}" required="true">
 					<f:selectItem itemLabel="--" itemValue="" />
 					<f:selectItems value="#{atividadeMBean.horarios}" />
 				</p:selectOneMenu>
 			</div>
 			
 			<p:outputLabel for="@next" value="Professor" />
-			<p:selectOneMenu id="professor_selecionado" class="field"
+			<p:selectOneMenu id="professor_selecionado" class="field" required="true"
 				value="#{atividadeMBean.professorSelected}">
 				<f:selectItems value="#{atividadeMBean.professores}" />
 			</p:selectOneMenu>

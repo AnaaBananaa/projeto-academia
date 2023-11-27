@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.primefaces.event.SelectEvent;
 import model.transferobject.TOAluno;
 import model.transferobject.TOAtividade;
 import model.transferobject.TOMarcacaoHorario;
+import repository.Repository;
 import sessionbean.ManterAlunoSBean;
 import sessionbean.ManterAtividadeSBean;
 import sessionbean.ManterMarcacaoHorarioSBean;
@@ -38,7 +40,10 @@ public class IU01_cad_marcacao_horarioMBean {
 	private ManterAlunoSBean alunoSbean = new ManterAlunoSBean();
 	private ManterAtividadeSBean atividadeSBean = new ManterAtividadeSBean();
 
-	public IU01_cad_marcacao_horarioMBean() {
+	public IU01_cad_marcacao_horarioMBean()  throws IOException {
+		if(!Repository.getInstance().isEntrou()) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+		}
 		this.marcacaoHorario = new TOMarcacaoHorario();
 		this.setMarcacaoHorarioes(new ArrayList<>());
 		listarMarcacaoHorarioes();

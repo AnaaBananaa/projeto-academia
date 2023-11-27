@@ -3,7 +3,9 @@ package sessionbean;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.entity.Aluno;
 import model.entity.Compra;
+import model.transferobject.TOAluno;
 import model.transferobject.TOCompra;
 import repository.Repository;
 
@@ -25,6 +27,26 @@ public class ManterCompraSBean {
 			tos.add(new TOCompra(user.getId(), user.getProduto(), user.getAluno(), user.getQuantidade(), user.getDataCompra(), user.isPago()));
 		}
 		return tos;
+	}
+	
+	public List<TOCompra> listarComprasPorAluno(String idAluno) {
+		List<TOCompra> tos = new ArrayList<>();
+		List<Compra> compras =repository.getCompras();
+		for(Compra user: compras) {
+			if(user.getAluno().getId().equals(idAluno) && !user.isPago()) {
+				tos.add(new TOCompra(user.getId(), user.getProduto(), user.getAluno(), user.getQuantidade(), user.getDataCompra(), user.isPago()));
+			}
+		}
+		return tos;
+	}
+	
+	public void atualizarStatus(TOCompra compra) {
+		List<Compra> compras = repository.getCompras();
+		for(Compra u : compras) {
+			if(u.getId().equals(compra.getId())) {
+				u.setPago(true);
+			}
+		}
 	}
 	
 	private String getId() {

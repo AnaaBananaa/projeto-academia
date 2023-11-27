@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import org.primefaces.event.SelectEvent;
 import enums.EnumEstados;
 import enums.EnumGenero;
 import model.transferobject.TOAluno;
+import repository.Repository;
 import sessionbean.ManterAlunoSBean;
 
 @ViewScoped
@@ -30,8 +32,12 @@ public class IU01_cad_alunoMBean {
 	private List<EnumGenero> generos = new ArrayList<>();
 	private List<EnumEstados> ufs = new ArrayList<>();
 	private List<Integer> vezesSemana = new ArrayList<>();
+	private Repository repository = Repository.getInstance();
 
-	public IU01_cad_alunoMBean() {
+	public IU01_cad_alunoMBean() throws IOException {
+		if(!repository.isEntrou()) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+		}
 		this.aluno = new TOAluno();
 		this.setAlunos(new ArrayList<>());
 		this.setGeneros(Arrays.asList(EnumGenero.values()));
