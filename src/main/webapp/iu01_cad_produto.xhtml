@@ -71,19 +71,19 @@
 		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
 			id="updateProduto" widgetVar="updateProdutoWV" responsive="true">
 			<div class="containerupdate">
-				<div class="field">
+				<div class="fieldupdate">
 					<p:outputLabel for="nome">Nome</p:outputLabel>
-					<p:inputText id="nome" styleClass="block"
+					<p:inputText id="nome"
 						value="#{produtoMBean.selectedProduto.nome}" />
 				</div>
-				<div class="field">
+				<div class="fieldupdate">
 					<p:outputLabel for="@next">Quantidade</p:outputLabel>
-					<p:inputNumber id="quantidade" styleClass="block"
+					<p:inputNumber id="quantidade"
 						value="#{produtoMBean.selectedProduto.quantidade}" />
 				</div>
-				<div class="field">
+				<div class="fieldupdate">
 					<p:outputLabel for="@next">Preço</p:outputLabel>
-					<p:inputNumber id="preco" styleClass="block" symbol="R$"
+					<p:inputNumber id="preco"  symbol="R$"
 						value="#{produtoMBean.selectedProduto.preco}" />
 				</div>
 				<p:commandButton id="btnSalvar" value="ATUALIZAR"
