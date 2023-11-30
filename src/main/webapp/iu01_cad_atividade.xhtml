@@ -8,48 +8,50 @@
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<title>Atividade</title>
+    <link rel="stylesheet"  href="atividade_style.css"/>
 </h:head>
-<h:body style="margin:0px auto">
+<h:body>
 	<h:form id="form_atividadeMBean">
 		<p:growl id="messages" showDetail="true" />
 		<menu:menu/>
-		<div>
-			<div class="field">
-				<p:outputLabel for="@next" value="Nome"/>
-				<p:inputText id="nome" styleClass="block"
-					value="#{atividadeMBean.atividade.nome}" required="true"/>
-			</div>
-			<div>
-				<p:outputLabel for="@next" value="Dia da Semana" />
-				<p:selectOneMenu id="diaSemana" value="#{atividadeMBean.atividade.diaSemana}" required="true">
+		<div class="container" >
+            <div class="label">
+                <p:outputLabel class="description" for="@next" value="Nome"/>
+                <p:inputText id="nome" styleClass="flex-box"
+                             value="#{atividadeMBean.atividade.nome}" required="true"/>
+            </div>
+			<div class="label">
+				<p:outputLabel class="description" for="@next" value="Dia da Semana" />
+				<p:selectOneMenu id="diaSemana" styleClass="flex-box" value="#{atividadeMBean.atividade.diaSemana}" required="true">
 					<f:selectItem itemLabel="--" itemValue="" />
 					<f:selectItems value="#{atividadeMBean.diasSemana}" />
 				</p:selectOneMenu>
 			</div>
-			<div>
-				<p:outputLabel for="@next" value="Horário Início" />
-				<p:selectOneMenu id="inicio" value="#{atividadeMBean.atividade.horarioInicio}" required="true">
+			<div class="label">
+				<p:outputLabel class="description" for="@next" value="Horário Início" />
+				<p:selectOneMenu id="inicio"  styleClass="flex-box" value="#{atividadeMBean.atividade.horarioInicio}" required="true">
 					<f:selectItem itemLabel="--" itemValue="" />
 					<f:selectItems value="#{atividadeMBean.horarios}" />
 				</p:selectOneMenu>
 			</div>
-			<div>
-				<p:outputLabel for="@next" value="Horário Fim" />
-				<p:selectOneMenu id="fim" value="#{atividadeMBean.atividade.horarioFim}" required="true">
+			<div class="label">
+				<p:outputLabel class="description" for="@next" value="Horário Fim" />
+				<p:selectOneMenu id="fim" styleClass="flex-box" value="#{atividadeMBean.atividade.horarioFim}" required="true">
 					<f:selectItem itemLabel="--" itemValue="" />
 					<f:selectItems value="#{atividadeMBean.horarios}" />
 				</p:selectOneMenu>
 			</div>
-			
-			<p:outputLabel for="@next" value="Professor" />
-			<p:selectOneMenu id="professor_selecionado" class="field" required="true"
+        <div class="label">
+			<p:outputLabel class="description" for="@next" value="Professor" />
+			<p:selectOneMenu id="professor_selecionado" styleClass="flex-box" class="field" required="true"
 				value="#{atividadeMBean.professorSelected}">
 				<f:selectItems value="#{atividadeMBean.professores}" />
 			</p:selectOneMenu>
-			
+        </div>
+
 			<p:commandButton id="btnSalvar" value="CADASTRAR"
 				action="#{atividadeMBean.cadastrarAtividade()}" update="form_atividadeMBean" />
-		</div>
+        </div>
 		<p:dataTable id="datatable" rowKey="#{atividade.nome}" var="atividade"
 			value="#{atividadeMBean.atividades}" selection="#{atividadeMBean.selectedAtividade}"
 			selectionMode="single" row="20">
@@ -82,37 +84,37 @@
 	<h:form id="form_updateAtividade">
 		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
 			id="updateAtividade" widgetVar="updateAtividadeWV" responsive="true">
-			<div>
-				<div class="field">
+			<div class="containerupdate">
+				<div class="fieldupdate">
 					<p:outputLabel for="nome">Nome</p:outputLabel>
 					<p:inputText id="nome" styleClass="block"
 						value="#{atividadeMBean.selectedAtividade.nome}" />
 				</div>
-				<div class="field">
+				<div class="fieldupdate">
 					<p:outputLabel for="@next">Dia da Semana</p:outputLabel>
 					<p:inputText id="diaSemana" styleClass="block"
 						value="#{atividadeMBean.selectedAtividade.diaSemana}" />
 				</div>
 
-				<div>
+				<div class="fieldupdate">
 					<p:outputLabel for="@next" value="Horário Início" />
-					<p:selectOneMenu id="inicio"
+					<p:selectOneMenu id="inicio" styleClass="block"
 						value="#{atividadeMBean.selectedAtividade.horarioInicio}">
 						<f:selectItem itemLabel="--" itemValue="" />
 						<f:selectItems value="#{atividadeMBean.horarios}" />
 					</p:selectOneMenu>
 				</div>
-				<div>
+				<div class="fieldupdate">
 					<p:outputLabel for="@next" value="Horário Fim" />
-					<p:selectOneMenu id="fim"
+					<p:selectOneMenu id="fim" styleClass="block"
 						value="#{atividadeMBean.selectedAtividade.horarioFim}">
 						<f:selectItem itemLabel="--" itemValue="" />
 						<f:selectItems value="#{atividadeMBean.horarios}" />
 					</p:selectOneMenu>
 				</div>
-				<div>
+				<div class="fieldupdate">
 					<p:outputLabel for="@next" value="Professor" />
-					<p:selectOneMenu id="professor_selecionado" class="field"
+					<p:selectOneMenu id="professor_selecionado"  styleClass="block"
 						value="#{atividadeMBean.professorSelectedAtt}">
 						<f:selectItems value="#{atividadeMBean.professores}" />
 					</p:selectOneMenu>

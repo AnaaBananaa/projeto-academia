@@ -8,25 +8,27 @@
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<title>Marcação de Horários</title>
-	<style></style>
+    <link rel="stylesheet"  href="horario_style.css"/>
 </h:head>
 <h:body>
 	<h:form id="form_marcacaoHorarioMBean">
 		<p:growl id="messages" showDetail="true" />
 		<menu:menu/>
-		<div style="width: 100%;">
-
-			<p:outputLabel for="@next" value="Aluno" />
-			<p:selectOneMenu id="aluno_selecionado" class="field" required="true"
+		<div class="container">
+         <div class="label">
+			<p:outputLabel class="description" for="@next" value="Aluno" />
+			<p:selectOneMenu id="aluno_selecionado"  required="true"
 				value="#{marcacaoHorarioMBean.alunoSelected}">
 				<f:selectItems value="#{marcacaoHorarioMBean.alunos}" />
 			</p:selectOneMenu>
-
-			<p:outputLabel for="@next" value="Atividade" />
-			<p:selectOneMenu id="atividade_selecionado" class="field" required="true"
+         </div>
+        <div class="label">
+        <p:outputLabel class="description"  for="@next" value="Atividade" />
+			<p:selectOneMenu id="atividade_selecionado"  required="true"
 				value="#{marcacaoHorarioMBean.atividadeSelected}">
 				<f:selectItems value="#{marcacaoHorarioMBean.atividades}" />
 			</p:selectOneMenu>
+            </div>
 
 			<p:commandButton id="btnSalvar" value="CADASTRAR"
 				action="#{marcacaoHorarioMBean.cadastrarMarcacaoHorario()}"
@@ -58,18 +60,21 @@
 	<h:form id="form_updateMarcacaoHorario">
 		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
 			id="updateMarcacaoHorario" widgetVar="updateMarcacaoHorarioWV" responsive="true">
-			<div>
+			<div class="containerupdate">
+                <div class="field">
 				<p:outputLabel for="@next" value="Aluno" />
-				<p:selectOneMenu id="aluno_selecionado" class="field"
+				<p:selectOneMenu id="aluno_selecionado"
 					value="#{marcacaoHorarioMBean.alunoSelectedAtt}">
 					<f:selectItems value="#{marcacaoHorarioMBean.alunos}" />
 				</p:selectOneMenu>
-
+                </div>
+                <div class="field">
 				<p:outputLabel for="@next" value="Atividade" />
-				<p:selectOneMenu id="atividade_selecionado" class="field"
+				<p:selectOneMenu id="atividade_selecionado"
 					value="#{marcacaoHorarioMBean.atividadeSelectedAtt}">
 					<f:selectItems value="#{marcacaoHorarioMBean.atividades}" />
 				</p:selectOneMenu>
+                </div>
 
 				<p:commandButton id="btnAtualizar" value="ATUALIZAR"
 					action="#{marcacaoHorarioMBean.atualizarMarcacaoHorario()}"

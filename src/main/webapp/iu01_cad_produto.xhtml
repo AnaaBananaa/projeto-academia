@@ -8,30 +8,33 @@
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<title>Produto</title>
+    <link rel="stylesheet"  href="produto_style.css"/>
 </h:head>
 <h:body>
 	<h:form id="form_produtoMBean">
 		<p:growl id="messages" showDetail="true" />
 		<menu:menu/>
-		<div>
-			<div class="field">
-				<p:outputLabel for="nome">Nome</p:outputLabel>
-				<p:inputText id="nome" styleClass="block" required="true"
+		<div class="container">
+			<div class="label">
+				<p:outputLabel class="description" for="nome">Nome</p:outputLabel>
+				<p:inputText id="nome" StyleClass="flex-box" required="true"
 					value="#{produtoMBean.produto.nome}" />
 			</div>
 			
-			<div class="field">
-				<p:outputLabel for="@next">Quantidade</p:outputLabel>
-				<p:inputNumber id="quantidade" styleClass="block"  required="true"
+			<div class="label">
+				<p:outputLabel class="description" for="@next">Quantidade</p:outputLabel>
+				<p:inputNumber id="quantidade"   StyleClass="flex-box" required="true"
 					value="#{produtoMBean.produto.quantidade}" />
 			</div>
-			<div class="field">
-				<p:outputLabel for="@next">Preço</p:outputLabel>
-				<p:inputNumber id="preco" styleClass="block" symbol="R$"  required="true"
+			<div class="label">
+				<p:outputLabel class="description" for="@next">Preço</p:outputLabel>
+				<p:inputNumber id="preco"  StyleClass="flex-box" symbol="R$"  required="true"
 					value="#{produtoMBean.produto.preco}" />
 			</div>
+        <div class="label">
 			<p:commandButton id="btnSalvar" value="CADASTRAR"
 				action="#{produtoMBean.cadastrarProduto()}" update="form_produtoMBean" />
+        </div>
 		</div>
 		<p:dataTable id="datatable" rowKey="#{produto.nome}" var="produto"
 			value="#{produtoMBean.produtos}" selection="#{produtoMBean.selectedProduto}"
@@ -61,7 +64,7 @@
 	<h:form id="form_updateProduto">
 		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
 			id="updateProduto" widgetVar="updateProdutoWV" responsive="true">
-			<div>
+			<div class="containerupdate">
 				<div class="field">
 					<p:outputLabel for="nome">Nome</p:outputLabel>
 					<p:inputText id="nome" styleClass="block"

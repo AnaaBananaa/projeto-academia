@@ -8,20 +8,21 @@
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<title>LOGIN</title>
-	<style></style>
+    <link rel="stylesheet"  href="index_style.css"/>
 </h:head>
 <h:body>
 	<h:form id="form_mensalidadeMBean">
 		<p:growl id="messages" showDetail="true" />
-		<p:card style="width: 25em">
+            <div class="content">
+                <h1 id="form-title">Login</h1>
 			<div class="field">
-				<p:outputLabel for="nome">Nome</p:outputLabel>
-				<p:inputText id="nome" styleClass="block"
+				<p:outputLabel class="description" for="nome">Nome</p:outputLabel>
+				<p:inputText id="nome" styleClass="flex-box"
 					value="#{loginMBean.usuario.nome}" />
 			</div>
 			<div class="field">
-				<p:outputLabel for="senha">Senha</p:outputLabel>
-				<p:password id="senha" styleClass="block"
+				<p:outputLabel class="description" for="senha">Senha</p:outputLabel>
+				<p:password id="senha" styleClass="flex-box"
 					value="#{loginMBean.usuario.senha}" feedback="true" redisplay="true"
 					toggleMask="true" />
 			</div>
@@ -30,8 +31,8 @@
 
 			<p:remoteCommand id="remoteCommand">
 				<a href="index.jsf"/>
-			</p:remoteCommand>
-		</p:card>
+        </p:remoteCommand>
+            </div>
 	</h:form>
 
 </h:body>

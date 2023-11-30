@@ -8,20 +8,21 @@
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<title>Usuario</title>
+    <link rel="stylesheet"  href="usuario_style.css"/>
 </h:head>
 <h:body>
 	<h:form id="form_home">
 		<p:growl id="messages" showDetail="true" />
 		<menu:menu/>
-		<div>
+		<div class="content">
 			<div class="field">
-				<p:outputLabel for="nome">Nome</p:outputLabel>
-				<p:inputText id="nome" styleClass="block"
+				<p:outputLabel class="description" for="nome">Nome</p:outputLabel>
+				<p:inputText id="nome" styleClass="flex-box"
 					value="#{home.usuario.nome}" />
 			</div>
 			<div class="field">
-				<p:outputLabel for="senha">Senha</p:outputLabel>
-				<p:password id="senha" styleClass="block"
+				<p:outputLabel class="description" for="senha">Senha</p:outputLabel>
+				<p:password id="senha" styleClass="flex-box"
 					value="#{home.usuario.senha}" feedback="true" redisplay="true" toggleMask="true"/>
 			</div>
 			<p:commandButton id="btnSalvar" value="CADASTRAR"
@@ -47,13 +48,13 @@
 	<h:form id="form_updateUsuario">
 		<p:dialog header="Atualizar Dados" showEffect="fade" modal="true"
 			id="updateUsuario" widgetVar="updateUsuarioWV" responsive="true">
-			<div>
-				<div class="field">
+			<div class="containerupdate">
+				<div class="fieldupdate">
 					<p:outputLabel for="nome">Nome</p:outputLabel>
 					<p:inputText id="nome" styleClass="block"
 						value="#{home.selectedUsuario.nome}" />
 				</div>
-				<div class="field">
+				<div class="fieldupdate">
 					<p:outputLabel for="senha">Senha</p:outputLabel>
 					<p:password id="senha" styleClass="block"
 						value="#{home.selectedUsuario.senha}" feedback="true" redisplay="true" toggleMask="true"/>
