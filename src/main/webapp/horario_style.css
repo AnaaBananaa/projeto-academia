@@ -14,22 +14,19 @@ body{
     margin-right: 10px;
     color: #1B4965;
 }
-.field{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
-.fieldupdate{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 .containerupdate{
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
+.field{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+
 .flex-box {
     width: 260px;
     height: 40px;
@@ -44,10 +41,7 @@ body{
     width:300px;
     gap: 8px;
 }
-.block {
-    width: 300px;
-    height: 30px;
-}
+
 
 .fieldset{
     margin-top: 10px;

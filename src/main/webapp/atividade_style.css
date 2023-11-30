@@ -60,5 +60,12 @@ container{
     display: flex;
     align-items: center;
     gap: 10px;
+    justify-content: space-between;
 }
-
+#form_updateAtividade{
+    width:40vw;
+}
+.flex-box {
+    width: 260px;
+    height: 40px;
+}

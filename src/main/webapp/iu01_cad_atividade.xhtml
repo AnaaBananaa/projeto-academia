@@ -107,18 +107,18 @@
 			<div class="containerupdate">
 				<div class="fieldupdate">
 					<p:outputLabel for="nome">Nome</p:outputLabel>
-					<p:inputText id="nome" styleClass="block"
+					<p:inputText id="nome" styleClass="flex-box"
 						value="#{atividadeMBean.selectedAtividade.nome}" />
 				</div>
 				<div class="fieldupdate">
 					<p:outputLabel for="@next">Dia da Semana</p:outputLabel>
-					<p:inputText id="diaSemana" styleClass="block"
+					<p:inputText id="diaSemana"
 						value="#{atividadeMBean.selectedAtividade.diaSemana}" />
 				</div>
 
 				<div class="fieldupdate">
 					<p:outputLabel for="@next" value="Horário Início" />
-					<p:selectOneMenu id="inicio" styleClass="block"
+					<p:selectOneMenu id="inicio"
 						value="#{atividadeMBean.selectedAtividade.horarioInicio}">
 						<f:selectItem itemLabel="--" itemValue="" />
 						<f:selectItems value="#{atividadeMBean.horarios}" />
@@ -126,7 +126,7 @@
 				</div>
 				<div class="fieldupdate">
 					<p:outputLabel for="@next" value="Horário Fim" />
-					<p:selectOneMenu id="fim" styleClass="block"
+					<p:selectOneMenu id="fim"
 						value="#{atividadeMBean.selectedAtividade.horarioFim}">
 						<f:selectItem itemLabel="--" itemValue="" />
 						<f:selectItems value="#{atividadeMBean.horarios}" />
@@ -134,7 +134,7 @@
 				</div>
 				<div class="fieldupdate">
 					<p:outputLabel for="@next" value="Professor" />
-					<p:selectOneMenu id="professor_selecionado" styleClass="block"
+					<p:selectOneMenu id="professor_selecionado"
 						value="#{atividadeMBean.professorSelectedAtt}">
 						<f:selectItems value="#{atividadeMBean.professores}" />
 					</p:selectOneMenu>
