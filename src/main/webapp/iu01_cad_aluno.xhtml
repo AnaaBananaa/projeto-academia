@@ -21,113 +21,123 @@ datatable {
 	<h:form id="form_alunoMBean">
 		<p:growl id="messages" showDetail="true" />
 		<menu:menu/>
-		
-		 <p:fieldset class="teste" legend="Informações Cadastrais">
-		<div class="container">
-			<div class="label">
-				<p:outputLabel class="description" for="nome" value="Nome"/>
-				<p:inputText id="nome" required="true"
-					value="#{alunoMBean.aluno.nome}" />
-			</div>
-			
-			<div class="label">
-				<p:outputLabel class="description" for="@next" value="Data de Nascimento" />
-				<p:inputMask id="date" value="#{alunoMBean.aluno.dataNascimento}"  required="true"
-					mask="99/99/9999" />
-			</div>
-			
-			<div class="label">
-				<p:outputLabel class="description" for="@next" value="Gênero" />
-				<p:selectOneMenu id="genero" value="#{alunoMBean.aluno.genero}"  required="true">
-					<f:selectItem itemLabel="--" itemValue="" />
-					<f:selectItems value="#{alunoMBean.generos}" />
-				</p:selectOneMenu>
-			</div>
-			
-			<div class="label">
-				<p:outputLabel class="description" for="@next" value="Telefone Celular" />
-				<p:inputMask id="phone" value="#{alunoMBean.aluno.celular}"  required="true"
-					mask="(99) 9 9999-9999" validateMask="true" />
-			</div>
-			
-			<div class="label">
-				<p:outputLabel class="description" for="email" value="Email" />
-				<p:inputText id="email"  required="true"
-					value="#{alunoMBean.aluno.email}" />
-			</div>
-        </div>
-         </p:fieldset>
-        <p:fieldset legend="Endereço">
-            <div class="container">
-			<div class="label">
-				<p:outputLabel class="description" for="@next" value="UF" />
-				<p:selectOneMenu id="uf" value="#{alunoMBean.aluno.estado}"  required="true">
-					<f:selectItem itemLabel="--" itemValue="" />
-					<f:selectItems value="#{alunoMBean.ufs}" />
-				</p:selectOneMenu>
-			</div>
-			
-			<div  class="label">
-				<p:outputLabel class="description" for="@next" value="Cidade" />
-				<p:inputText id="cidade"  required="true"
-					value="#{alunoMBean.aluno.cidade}" />
-			</div>
-			
-			<div  class="label">
-				<p:outputLabel class="description" for="@next" value="Bairro" />
-				<p:inputText id="bairro"  required="true"
-					value="#{alunoMBean.aluno.bairro}" />
-			</div>
-			
-			<div  class="label">
-				<p:outputLabel class="description" for="@next" value="Rua" />
-				<p:inputText id="rua"  required="true"
-					value="#{alunoMBean.aluno.rua}" />
-			</div>
-			
-			<div  class="label">
-				<p:outputLabel class="description" for="@next" value="Número" />
-				<p:inputMask id="numero" value="#{alunoMBean.aluno.numero}"  required="true"
-					mask="9999" validateMask="true" />
-			</div>
+		<div class="div-fora">
+			<p:card class="fieldset">
+			<p:divider align="left" type="dashed">
+					<b>Informações Cadastrais</b>
+				</p:divider>
+				<div class="container">
+					<div class="label">
+						<p:outputLabel class="description" for="nome" value="Nome" />
+						<p:inputText id="nome" required="true"
+							value="#{alunoMBean.aluno.nome}" />
+					</div>
 
-			<div  class="label">
-				<p:outputLabel class="description" for="@next" value="CEP" />
-				<p:inputMask id="cep" value="#{alunoMBean.aluno.CEP}"  required="true"
-					mask="99999-999" validateMask="true" />
-			</div>
-            </div>
-		</p:fieldset>
-		<p:fieldset legend="Informações da Matrícula">
-            <div class="container">
-			<div class="label">
-				<p:outputLabel class="description" for="@next" value="Data de Vencimento" />
-				<p:inputMask id="dateVenc" value="#{alunoMBean.aluno.dataVencimento}"  required="true"
-					mask="99/99/9999" />
-			</div>
-			
-			<div class="label">
-				<p:outputLabel class="description" for="@next" value="Valor da Mensalidade"/>
-				<p:inputText id="val"
-					value="R$ #{alunoMBean.aluno.valorMensalidade}" disabled="true"/>
-			</div>
-			<div class="label">
-				<p:outputLabel class="description" for="@next" value="Vezes na Semana" />
-				<p:selectOneMenu id="vezesSemana" value="#{alunoMBean.aluno.vezesSemana}"  required="true">
-					<p:ajax event="itemSelect" update="val"
-						listener="#{alunoMBean.atualizarMensalidade}" />
-					<f:selectItem itemLabel="--" itemValue="" />
-					<f:selectItems value="#{alunoMBean.vezesSemana}" />
-				</p:selectOneMenu>
-			</div>
-			</div>
-		</p:fieldset>
+					<div class="label">
+						<p:outputLabel class="description" for="@next"
+							value="Data de Nascimento" />
+						<p:inputMask id="date" value="#{alunoMBean.aluno.dataNascimento}"
+							required="true" mask="99/99/9999" />
+					</div>
 
-        <div class="botao">
+					<div class="label">
+						<p:outputLabel class="description" for="@next" value="Gênero" />
+						<p:selectOneMenu id="genero" value="#{alunoMBean.aluno.genero}"
+							required="true">
+							<f:selectItem itemLabel="--" itemValue="" />
+							<f:selectItems value="#{alunoMBean.generos}" />
+						</p:selectOneMenu>
+					</div>
+
+					<div class="label">
+						<p:outputLabel class="description" for="@next"
+							value="Telefone Celular" />
+						<p:inputMask id="phone" value="#{alunoMBean.aluno.celular}"
+							required="true" mask="(99) 9 9999-9999" validateMask="true" />
+					</div>
+
+					<div class="label">
+						<p:outputLabel class="description" for="email" value="Email" />
+						<p:inputText id="email" required="true"
+							value="#{alunoMBean.aluno.email}" />
+					</div>
+				</div>
+				<div class="container">
+					<div class="label">
+						<p:outputLabel class="description" for="@next" value="UF" />
+						<p:selectOneMenu id="uf" value="#{alunoMBean.aluno.estado}"
+							required="true">
+							<f:selectItem itemLabel="--" itemValue="" />
+							<f:selectItems value="#{alunoMBean.ufs}" />
+						</p:selectOneMenu>
+					</div>
+
+					<div class="label">
+						<p:outputLabel class="description" for="@next" value="Cidade" />
+						<p:inputText id="cidade" required="true"
+							value="#{alunoMBean.aluno.cidade}" />
+					</div>
+
+					<div class="label">
+						<p:outputLabel class="description" for="@next" value="Bairro" />
+						<p:inputText id="bairro" required="true"
+							value="#{alunoMBean.aluno.bairro}" />
+					</div>
+
+					<div class="label">
+						<p:outputLabel class="description" for="@next" value="Rua" />
+						<p:inputText id="rua" required="true"
+							value="#{alunoMBean.aluno.rua}" />
+					</div>
+
+					<div class="label">
+						<p:outputLabel class="description" for="@next" value="Número" />
+						<p:inputMask id="numero" value="#{alunoMBean.aluno.numero}"
+							required="true" mask="9999" validateMask="true" />
+					</div>
+
+					<div class="label">
+						<p:outputLabel class="description" for="@next" value="CEP" />
+						<p:inputMask id="cep" value="#{alunoMBean.aluno.CEP}"
+							required="true" mask="99999-999" validateMask="true" />
+					</div>
+				</div>
+				<p:divider align="left" type="dashed">
+					<b>Informações de Matrícula</b>
+				</p:divider>
+				<div class="container">
+					<div class="label">
+						<p:outputLabel class="description" for="@next"
+							value="Data de Vencimento" />
+						<p:inputMask id="dateVenc"
+							value="#{alunoMBean.aluno.dataVencimento}" required="true"
+							mask="99/99/9999" />
+					</div>
+
+					<div class="label">
+						<p:outputLabel class="description" for="@next"
+							value="Valor da Mensalidade" />
+						<p:inputText id="val"
+							value="R$ #{alunoMBean.aluno.valorMensalidade}" disabled="true" />
+					</div>
+					<div class="label">
+						<p:outputLabel class="description" for="@next"
+							value="Vezes na Semana" />
+						<p:selectOneMenu id="vezesSemana"
+							value="#{alunoMBean.aluno.vezesSemana}" required="true">
+							<p:ajax event="itemSelect" update="val"
+								listener="#{alunoMBean.atualizarMensalidade}" />
+							<f:selectItem itemLabel="--" itemValue="" />
+							<f:selectItems value="#{alunoMBean.vezesSemana}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				<div class="botao">
 		<p:commandButton id="btnSalvar" value="CADASTRAR"
 				action="#{alunoMBean.cadastrarAluno()}" update="form_alunoMBean" />
         </div>
-
+			</p:card>
+		</div>
 
 		<p:dataTable id="datatable" style="width: 100%;height: 400px; overflow: scroll;" rowKey="#{aluno.nome}" var="aluno"
 			value="#{alunoMBean.alunos}" selection="#{alunoMBean.selectedAluno}"

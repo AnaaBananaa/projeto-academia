@@ -14,14 +14,19 @@
 	<h:form id="form_professorMBean">
 		<p:growl id="messages" showDetail="true" />
 		<menu:menu/>
-		<div class="container">
-			<div class="field">
-				<p:outputLabel class="description" for="nome">Nome</p:outputLabel>
-				<p:inputText id="nome"  styleClass="flex-box"
-					value="#{professorMBean.professor.nome}" />
-			<p:commandButton id="btnSalvar" value="CADASTRAR"
-				action="#{professorMBean.cadastrarProfessor()}" update="form_professorMBean" />
-            </div>
+		<div class="div-fora">
+			<p:card class="fieldset">
+				<div class="container">
+					<div class="field">
+						<p:outputLabel class="description" for="nome">Nome</p:outputLabel>
+						<p:inputText id="nome" styleClass="flex-box" required="true"
+							value="#{professorMBean.professor.nome}" />
+					</div>
+					<p:commandButton id="btnSalvar" value="CADASTRAR"
+							action="#{professorMBean.cadastrarProfessor()}"
+							update="form_professorMBean" />
+				</div>
+			</p:card>
 		</div>
 		<p:dataTable id="datatable" rowKey="#{professor.nome}" var="professor"
 			value="#{professorMBean.professores}" selection="#{professorMBean.selectedProfessor}"
@@ -33,7 +38,7 @@
 			<p:ajax event="rowSelect" oncomplete="PF('updateProfessorWV').show()"
 				update="form_updateProfessor:updateProfessor" listener="#{professorMBean.onRowSelect}" />
 
-			<p:column headerText="Professor">
+			<p:column headerText="Nome">
 				<h:outputText value="#{professor.nome}" />
 			</p:column>
 

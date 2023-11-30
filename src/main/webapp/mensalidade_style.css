@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+body{
+    background-color: #CAE9FF;
+}
+
 #form-title{
     font-family: 'Roboto', serif;
     font-style: normal;
@@ -14,11 +18,34 @@
     color: #1B4965;
 }
 .container{
+    margin: 10px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    width:300px;
     gap: 8px;
+}
+.block {
+    width: 300px;
+    height: 30px;
+}
+
+.fieldset{
+    margin-top: 10px;
+    width: 75%;
+    height:95%;
+    float: left;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-fora{
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .description{
     font-family: "Roboto",serif;
@@ -32,7 +59,7 @@
 }
 .content{
     margin: 10px;
-    padding: 10px;
+    padding: 5px;
     display: flex;
     justify-content: center;
     flex-direction: column;

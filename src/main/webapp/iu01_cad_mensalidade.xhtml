@@ -14,8 +14,9 @@
 	<h:form id="form_mensalidadeMBean">
 		<p:growl id="messages" showDetail="true" />
 		<menu:menu/>
-		<p:card style="background: #CAE9FF">
-			<div class="container">
+		<div class="div-fora">
+			<p:card class="fieldset">
+				<div class="container">
 				<p:outputLabel class="description" for="@next" value="Aluno" />
 				<p:selectOneMenu id="aluno_selecionado" class="field"
 					value="#{mensalidadeMBean.alunoSelected}" style="width: 25em">
@@ -26,7 +27,7 @@
 					<f:selectItems value="#{mensalidadeMBean.alunos}" />
 				</p:selectOneMenu>
 				<p:dataTable id="datatable" widgetVar="data"
-					style="width: 30em;height:300px; overflow-y: scroll;"
+					style="width: 30em;height:250px; overflow-y: scroll;"
 					rowKey="#{compra.aluno.nome}" var="compra"
 					value="#{mensalidadeMBean.comprasDoAluno}" row="10">
 					<f:facet name="header">
@@ -62,6 +63,7 @@
             </div>
 			
 		</p:card>
+		</div>
 	</h:form>
 
 </h:body>

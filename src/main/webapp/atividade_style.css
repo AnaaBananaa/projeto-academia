@@ -8,7 +8,20 @@ body{
     background-color: #CAE9FF;
 }
 
-.container{
+.description{
+    font-family: "Roboto",serif;
+    font-size: 50px;
+    margin-right: 10px;
+    color: #1B4965;
+}
+
+.label {
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px; /* Isso alinha os campos no topo, ajuste conforme necessário */
+    /* Adicione outras propriedades de estilo, margens, etc., conforme necessário */
+}
+container{
     margin: 10px;
     padding: 10px;
     display: flex;
@@ -17,36 +30,23 @@ body{
     align-items: center;
     gap: 8px;
 }
-
-.label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    width: 100%;
-}
-.description{
-    font-family: "Roboto Condensed", cursive;
-    font-size: 50px;
-    margin-right: 10px;
-    color: #1B4965;
-}
-.containerupdate{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-.fieldupdate{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 .block {
     width: 300px;
     height: 30px;
 }
-.flex-box {
-    width: 260px;
-    height: 40px;
+
+.fieldset{
+    margin-top: 10px;
+    width: 95%;
+    float: left;
+    margin-bottom: 30px;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-fora{
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
